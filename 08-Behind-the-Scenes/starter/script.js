@@ -183,9 +183,14 @@ addExpr(2, 5);
     firstName: 'Jessica',
     lastName: 'Williams',
     age: 27,
+    family: ['Alice', 'Bob'],
  };
 
  const jessicaCopy = Object.assign({}, jessica2);
  jessicaCopy.lastName = 'Davis';
+ 
+ jessicaCopy.family.push('Mary');
+ jessicaCopy.family.push('John');
+ 
  console.log('before marriage:', jessica2);
  console.log('after marriage: ', jessicaCopy);
