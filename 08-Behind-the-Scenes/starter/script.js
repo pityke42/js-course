@@ -71,7 +71,121 @@ var x = 1;
 let y = 2;
 const z = 3;
 console.log(x === window.x)
-*/
+
+// const calcAge = function (birthYear){
+//     console.log(2023 - birthYear);
+//     console.log(this)
+// }
+// calcAge(1998);
+
+// const calcAgeArrow = (birthYear) => {
+//     console.log(2023 - birthYear);
+//     console.log(this)
+// }
+// calcAgeArrow(1998);
 
 
+// //method borrowing 
+// const pityke = {
+//     year: 1998,
+//     calcAge: function(){
+//         console.log(2023 - this.year);
+//     }
+// }
+// pityke.calcAge()
+// const matilda = {
+//     year: 2017,
+// }
+// matilda.calcAge = pityke.calcAge;
 
+// const f = pityke.calcAge;
+// f();
+
+const pityke = {
+    firstName: 'Balla',
+    year: 1998,
+    calcAge: function(){
+        // console.log(2023 - this.year);
+
+        // //solution 1.
+        // //create self var to access the THIS keyword
+        // const self = this;
+
+        // console.log(2023 - this.year);
+        // const isGenZ = function(){
+        //     console.log(self);
+        //     console.log( self.year >= 1997 && self.year <= 2012);
+
+        //     //console.log(this.year >= 1997 && this.year <= 2012);
+        // };
+   
+        //solution 2.//arrow function using THIS keyword from the parent's scope fj      
+        const isGenZ = () =>{
+            console.log(this);
+            console.log( this.year >= 1997 && this.year <= 2012);
+
+            //console.log(this.year >= 1997 && this.year <= 2012);
+        };
+        isGenZ();
+    },
+    greet: () => {
+        console.log(`Hey ${this.firstName}`)
+    }
+};
+
+pityke.calcAge();
+//ARGUMENTS keyword
+const addExpr = function(a, b){
+    console.log(arguments);
+    return a + b;
+}
+addExpr(2, 5);
+
+ let age = 30;
+ let oldAge = age;
+ age = 31;console.log(age);
+ console.log(oldAge);
+
+ const me = {
+    name: 'Pityke',
+    age: 24,
+ };
+
+ const friend = me;
+ friend.age = 27;
+ console.log('friend', friend);
+ console.log('me', me);
+ */
+
+ //primitive types
+ let lastName = 'Williams';
+ let oldLastName = lastName;
+ lastName = 'Davis';
+ console.log(lastName, oldLastName)
+
+
+ //reference types
+ const jessica = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    age: 27,
+
+ };
+
+ const marriedJessica = jessica;
+ marriedJessica.lastName = 'Davis';
+ console.log('before marrige:', jessica);
+ console.log('after marriage:', marriedJessica);
+ //marriedJessica = {} //we can't do because the const variable
+
+ //copying objects
+ const jessica2 = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    age: 27,
+ };
+
+ const jessicaCopy = Object.assign({}, jessica2);
+ jessicaCopy.lastName = 'Davis';
+ console.log('before marriage:', jessica2);
+ console.log('after marriage: ', jessicaCopy);
