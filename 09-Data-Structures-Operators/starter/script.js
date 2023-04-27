@@ -12,11 +12,18 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  order: function(starterIndex, mainIndex){
+  order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
-  orderDelivery: function({starterIndex = 1, mainIndex = 0, time = '20:00', address}){
-    console.log(`order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered ${address} at ${time}`);
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(
+      `order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered ${address} at ${time}`
+    );
   },
   openingHours: {
     thu: {
@@ -32,8 +39,12 @@ const restaurant = {
       close: 24,
     },
   },
-  orederPasta: function(ing1, ing2, ing3){
+  orederPasta: function (ing1, ing2, ing3) {
     console.log(`here is your delicious pasta ${ing1}, ${ing2} and ${ing3}`);
+  },
+  orderPizza: function(mainIngrediend, ...otherIngredient){
+    console.log(mainIngrediend);
+    console.log(otherIngredient);
   }
 };
 
@@ -52,8 +63,8 @@ const restaurant = {
 // // // console.log(name, openingHours, categories);
 
 // // const {
-// //   name: restaurantName, 
-// //   openingHours: hours, 
+// //   name: restaurantName,
+// //   openingHours: hours,
 // //   categories: tags
 // // } = restaurant;
 // // // console.log(restaurantName, hours, tags);
@@ -85,7 +96,6 @@ const restaurant = {
 // // const [starter, mainCourse] = restaurant.order(2, 0);
 // // console.log(starter, mainCourse);
 
-
 // // //nested destructuring
 // // const nested = [2, 4, [5, 6]];
 // // // const [i, , j] = nested;
@@ -98,12 +108,10 @@ const restaurant = {
 // // const [p = 1, q = 1, r = 1] = [8, 9];
 // // console.log(p, q, r);
 
-
 // // const arr = [2, 3, 4];
 // // const a = arr[0];
 // // const b = arr[1];
 // // const c = arr[2];
-
 
 // // //destructuring an array
 // // const [x, y, z] = arr;
@@ -120,16 +128,13 @@ const restaurant = {
 // // // secondary = temp;
 // // // console.log(main, secondary)
 
-
 // // [main, secondary] = [secondary, main];
-// // console.log(main, secondary); 
-
+// // console.log(main, secondary);
 
 // //hard coded shitty new array
 // const arr = [7, 8, 9];
 // const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
 // console.log(badNewArr);
-
 
 // //new array with spread(...) operator
 // const newArr = [1, 2, ...arr]; //expand this array with original elements
@@ -150,34 +155,63 @@ const restaurant = {
 // const letters = [...str, ' ', 'S. '];
 // // console.log(letters);
 
-
-
 // //real world examp;e
-// const ingredients = [prompt('Let\'s make pasta! Ingredent 1?'), 
+// const ingredients = [prompt('Let\'s make pasta! Ingredent 1?'),
 //   prompt('Ingredent 2?'),
 //   prompt('Ingredent 3?')];
 //   console.log(ingredients);
 //   restaurant.orederPasta(...ingredients);
 
+// //objects
+// const newRestaurant = {
+//   foundedIn: 1998,
+//   ...restaurant,
+//   founder: 'Giuseppe',
+// };
+// console.log(newRestaurant);
+// const restaurantCopy = {
+//   ...restaurant,
+// };
+// restaurantCopy.name = 'Ristorante Roma';
+// console.log(restaurant.name);
+// console.log(restaurantCopy.name);
 
-  //objects
-const newRestaurant = {
-  foundedIn: 1998,
-  ...restaurant,
-  founder: 'Giuseppe',
+
+
+//DESTRUCTURING
+
+// //SPREAD, because of the RIGHT hand side of = 
+// const arrr = [1, 2, ...[3, 4]];
+
+
+// //REST, because of theLeft hand side 
+// const [a, b, ...others] = [1, 2, 3, 4, 5];
+// console.log(a, b, others);
+
+
+// const [pizza, , Risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// console.log(pizza, Risotto, otherFood);
+
+
+// //Objects
+// const {sat,  ...weekdays} = restaurant.openingHours;
+// console.log(weekdays)
+
+//FUNCTIONS//REST ARGUMENTS
+
+const add = function(...numbers){
+  let sum = 0;
+  for(let i = 0; i < numbers.length; i++){
+    sum += numbers[i];
+  }
+  console.log(sum)
 
 };
-console.log(newRestaurant);
- const restaurantCopy = {
-  ...restaurant
- };
- restaurantCopy.name = 'Ristorante Roma';
- console.log(restaurant.name);
- console.log(restaurantCopy.name);
+add(2, 3);
+add(5, 3, 7, 2);
 
- 
-  
+const x = [23, 5, 7];
+add(...x)
 
-
-
-
+restaurant.orderPizza('mush', 'onion', 'olives', 'spinach');
+restaurant.orderPizza('mush');
