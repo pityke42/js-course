@@ -84,88 +84,88 @@
 // // console.log(guests);
 
 
-// // //nullish: null and undefined (NOT 0 or '')
-// // const guestsCorrect = restaurant.numGuests ?? 10;
-// // console.log(guestsCorrect);
-// // // restaurant.orderDelivery({
-// // //   time: '22:30',
-// // //   address: 'Pesti 99',
-// // //   mainIndex: 2,
-// // //   starterIndex: 2,
-// // // });
-// // // restaurant.orderDelivery({
-// // //   address: 'Pesti 9000',
-// // //   starterIndex: 1,
-// // // })
+// //nullish: null and undefined (NOT 0 or '')
+// const guestsCorrect = restaurant.numGuests ?? 10;
+// console.log(guestsCorrect);
+// // restaurant.orderDelivery({
+// //   time: '22:30',
+// //   address: 'Pesti 99',
+// //   mainIndex: 2,
+// //   starterIndex: 2,
+// // });
+// // restaurant.orderDelivery({
+// //   address: 'Pesti 9000',
+// //   starterIndex: 1,
+// // })
 
-// // // const {name, openingHours, categories} = restaurant;
-// // // // console.log(name, openingHours, categories);
+// // const {name, openingHours, categories} = restaurant;
+// // // console.log(name, openingHours, categories);
 
-// // // const {
-// // //   name: restaurantName,
-// // //   openingHours: hours,
-// // //   categories: tags
-// // // } = restaurant;
-// // // // console.log(restaurantName, hours, tags);
+// // const {
+// //   name: restaurantName,
+// //   openingHours: hours,
+// //   categories: tags
+// // } = restaurant;
+// // // console.log(restaurantName, hours, tags);
 
-// // // //default values
-// // // const {menu = [], starterMenu: starters = [] } = restaurant;
-// // // // console.log(menu, starters);
+// // //default values
+// // const {menu = [], starterMenu: starters = [] } = restaurant;
+// // // console.log(menu, starters);
 
-// // // //mutating variables
-// // // let a = 111;
-// // // let b = 999;
-// // // const obj = {
-// // //   a: 23,
-// // //   b: 7,
-// // //   c: 14
-// // // };
-// // // // {a, b} = obj; //JS expects a code block
-// // // ({a, b} = obj);
-// // // // console.log(a, b);
+// // //mutating variables
+// // let a = 111;
+// // let b = 999;
+// // const obj = {
+// //   a: 23,
+// //   b: 7,
+// //   c: 14
+// // };
+// // // {a, b} = obj; //JS expects a code block
+// // ({a, b} = obj);
+// // // console.log(a, b);
 
-// // // //nested lobjects
-// // // const {fri: {open, close}} = openingHours;
-// // // console.log(open, close);
-// // // //const {fri: {open: o, close: c}} = openingHours;
-// // // //console.log(o, c);
+// // //nested lobjects
+// // const {fri: {open, close}} = openingHours;
+// // console.log(open, close);
+// // //const {fri: {open: o, close: c}} = openingHours;
+// // //console.log(o, c);
 
-// // // //DESTRUCTURIG ARRAYS
-// // // //receive 2 return values of a function
-// const [starter, mainCourse] = restaurant.order(2, 0);
-// console.log(starter, mainCourse);
+// // //DESTRUCTURIG ARRAYS
+// // //receive 2 return values of a function
+const [starter, mainCourse] = restaurant.order(2, 0);
+console.log(starter, mainCourse);
 
-// // // //nested destructuring
-// // // const nested = [2, 4, [5, 6]];
-// // // // const [i, , j] = nested;
-// // // // console.log(i, j);
+//nested destructuring
+const nested = [2, 4, [5, 6]];
+// const [i, , j] = nested;
+// console.log(i, j);
 
-// // // const[i, , [j, k]] = nested;
-// // // console.log(i, j, k);
+const[i, , [j, k]] = nested;
+console.log(i, j, k);
 
-// // // //default values
-// // // const [p = 1, q = 1, r = 1] = [8, 9];
-// // // console.log(p, q, r);
+//default values
+const [p = 1, q = 1, r = 1] = [8, 9];
+console.log(p, q, r);
 
-// // // const arr = [2, 3, 4];
-// // // const a = arr[0];
-// // // const b = arr[1];
-// // // const c = arr[2];
+const arr = [2, 3, 4];
+const a = arr[0];
+const b = arr[1];
+const c = arr[2];
 
-// // // //destructuring an array
-// // // const [x, y, z] = arr;
-// // // console.log(x, y, z);
-// // // console.log(arr);
+//destructuring an array
+const [x, y, z] = arr;
+console.log(x, y, z);
+console.log(arr);
 
-// // // //second element is skipped, third element is SECOND(named)
-// // // let [main, , secondary] = restaurant.categories;
-// // // console.log(main, secondary);
+//second element is skipped, third element is SECOND(named)
+let [main, , secondary] = restaurant.categories;
+console.log(main, secondary);
 
-// // // // //switching variables
-// // // // const temp = main;
-// // // // main = secondary;
-// // // // secondary = temp;
-// // // // console.log(main, secondary)
+//switching variables
+// const temp = main;
+// main = secondary;
+// secondary = temp;
+// console.log(main, secondary)
 
 // // // [main, secondary] = [secondary, main];
 // // // console.log(main, secondary);
@@ -285,46 +285,68 @@
 */
 
 //1. coding challange
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
-const players1 = game.players[0];
-const players2 = game.players[1];
-const 
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
+// //1.
+// const [players1, players2] = game.players;
+// // console.log(players1, players2);
+//  //2.
+//  const [gk, ...fieldPlayers] = players1;
+// //  console.log(gk, fieldPlayers);
+//  //3.
+//  const allPlayers = [...players1, ...players2];
+// //  console.log(allPlayers);
+//  //4.
+//  const players1Final = [...players1, 'Thiago', 'Couthino', 'Periscic'];
+//  //5.
+//  const {odds: {team1, x:draw, team2}} = game;
+//  console.log(team1, draw, team2);
+//  //6.
+//  const printGoals = function(...players){
+//   console.log(`${players.length} goals were scored`)
+//  }
+//  printGoals('Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels');
+//  printGoals('Lewandowski', 'Gnarby');
+//  //7.
+//  team1 < team2 && console.log('team 1 is more likely to win');
+//  team1 > team2 && console.log('team 2 is more likely to win');
+
+
