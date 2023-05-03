@@ -1,0 +1,1 @@
+console.log(`an event happened, on average, every ${} minutes`);

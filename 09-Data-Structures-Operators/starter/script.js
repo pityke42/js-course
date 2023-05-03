@@ -460,3 +460,291 @@ const restaurant = {
 // for(const [day, {open, close}] of entries){
 //   console.log(`on ${day} we open at ${open} and close at ${close}`);
 // }
+
+//codgin challange 2.
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+//1.
+// function scored(array){
+//   let index = 0;
+//   for(let i = 0; i < array.length; i++){
+//     index++;
+//     console.log(`Goal ${index}: ${array[i]}`)
+//   }
+// }
+// console.log(scored(game.scored))
+
+// for (const [i, player] of game.scored.entries()){
+//   console.log(`Goal ${i +1}: ${player}`);
+// }
+
+//2.
+// function average(array){
+//   let sum = 0;
+//   for(let i = 0; i < array.length; i++){
+//     sum += array[i];
+//   }
+//   return sum / array.length;
+// }
+// console.log(average(Object.values(game.odds)));
+
+//3.
+// for(const [team, odd] of Object.entries(game.odds)){
+//   const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`
+//   console.log(`odd of ${teamStr} ${odd}`)
+// }
+
+
+// //NEW SET
+// const ordersSet = new Set(['pasta', 'pizza', 'pizza', 'rizotto', 'pasta', 'pizza']);
+// console.log(ordersSet);
+
+// console.log(new Set('Pityke'));
+
+// console.log(ordersSet.size);
+
+// //HAS check
+// console.log(ordersSet.has('pizza'));
+// console.log(ordersSet.has('garlic'));
+
+// //ADD adding 
+// ordersSet.add('garlic bread');
+// ordersSet.add('garlic bread');
+
+// //DELETE
+// ordersSet.delete('risotto');
+// console.log(ordersSet);
+
+// for (const order of ordersSet){
+//   console.log(order);
+// };
+
+// //example
+// const staff = ['waiter', 'chef', 'waiter', 'manager', 'chef', 'waiter'];
+// //SPREAD OPERATOR CREATE A NEW ARRAY
+// const staffUnique = [...new Set(staff)];
+// console.log(staffUnique);
+
+// console.log(new Set(['waiter', 'chef', 'waiter', 'manager', 'chef', 'waiter']).size);
+// //counting duplicates
+// console.log(new Set('asdkjhaskjjkhfhhhfaghakjshd').size);
+
+
+// MAP
+// SET
+// const rest = new Map();
+//  rest.set('name', 'Classico Italiano');
+//  rest.set(1, 'Firenze, Italy');
+//  rest.set(2, 'Lisbon, Portugal');
+//  rest.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic']).set('open', 11).set('close', 23).set(true, 'we are open').set(false, 'we are closed');
+// //  console.log(rest);
+
+// //GET
+// //  console.log(rest.get('name'));
+// //  console.log(rest.get(true));
+
+//  const time = 21;
+//  console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+// //HAS
+// console.log(rest.has('categoriesd'));
+
+// //DELETE
+// rest.delete(2);
+// console.log(rest);
+
+// //SIZE
+// console.log(rest.size);
+
+//CLEAR
+// rest.clear();
+// console.log(rest);
+
+
+//these 2 array is not the same object in the heap
+// rest.set([1, 2], 'Test');
+// console.log(rest.get([1, 2]));
+// const arr = [1, 2];
+// rest.set(arr, 'Test');
+// console.log(rest);
+
+// rest.set(document.querySelector('h1'), 'Heading');
+
+// const question = new Map([
+//   ['question', 'what is the best programming language in the world'],
+//   [1, 'c'],
+//   [2, 'Java'],
+//   [3, 'JS'],
+//   ['correct', 3],
+//   [true, 'correct'],
+//   [false, 'try again'],
+// ]);
+// console.log(question);
+
+
+// //CONVERT OBJECT TO MAP
+// console.log(Object.entries(openingHours));
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);
+
+// //MAP ARE ITERABLES
+// console.log(question.get('question'));
+// for (const [key, value] of question){
+//   if(typeof key === 'number'){
+//     console.log(`Answer ${key}: ${value}`);
+//   }
+// }
+// const answer = Number(prompt('Your answer'));
+// console.log(answer);
+
+// console.log(question.get(question.get('correct') === answer ));
+
+//CONVERT MAP TO ARRAY
+// console.log(...question);
+ // console.log(question.entries());
+// console.log(question.keys());
+// console.log(question.values());
+
+
+//coding challange3.
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+//1.
+// const events = [...new Set(gameEvents.values())];
+//2.
+// gameEvents.delete(64);
+//3.
+// const time = [...gameEvents.keys()].pop();
+// console.log(`an event happened, on average, every ${time / gameEvents.size} minutes`);
+//4.
+// for(const [key, value] of gameEvents){
+//   if (key < 45){
+//     console.log(`[1. half] things ${key} ${value}`)
+//   } 
+//   else if(key > 90) {
+//     console.log(`[out of playtime] things ${key} ${value}`)
+//   } else {
+//     console.log(`[2. half] thing ${key} ${value}`)
+//   }
+// }
+
+// for(const [min, event] of gameEvents){
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${half} HALF] ${min}: ${event}`);
+// }
+
+//STRINGS 
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+console.log(plane[0]);
+
+//strange
+console.log('B737'[0]);
+
+//string length
+console.log(airline.length);
+console.log('B737'.length);
+
+//Methods
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+//SLICE IS JUST SUBSTRING //MUTATED STRING
+console.log(airline.slice(4));
+console.log(airline.slice(4, 7));
+
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+//minus number starts counting from the end
+console.log(airline.slice(-2));
+//minus cut off the last 
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function(seat){
+  //B and E are the middle seats
+  const s = seat.slice(-1);
+  if(s === 'B' || s === 'E'){
+    console.log('You got the middle seat');
+  } else {
+    console.log('You got lucky');
+  }
+}
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+//JS CONVERTS STRINGS TO AN OBJECT TO GET THE METHODS//BOXING
+console.log(new String('Pityke'));
+console.log(typeof new String('Pityke'));
+console.log(typeof new String('Pityke').slice(1));
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+//Fix capitalisation in name 
+const passenger = 'pItyke'; //Pityke
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+//Comparing e-mails
+const email = 'hali@pityke.io';
+const loginEmail = '  Hello@Pityke.Io \n';
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trimEnd();
+console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
