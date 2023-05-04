@@ -748,3 +748,85 @@ console.log(trimmedEmail);
 const normalizedEmail = loginEmail.toLowerCase().trim();
 console.log(normalizedEmail);
 console.log(email === normalizedEmail);
+
+//Replace part of strings$
+const priceGB = '288,97£';
+const priceUs = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUs);
+//replace create a new string 
+const announcement = 'All passangers come to boarding door 23. Boarding door 23!';
+console.log(announcement.replace('door', 'gate'));
+
+//RegEx
+console.log(announcement.replace(/door/g, 'gate'));
+
+//Booleans
+const plane2 = 'Airbus A320neo';
+console.log(plane2.includes('A320'));
+console.log(plane2.includes('Boeing'));
+console.log(plane2.startsWith('Air'));
+
+if(plane.startsWith('Airbus') && plane.endsWith('neoi')){
+  console.log('Part of a new aribus family');
+}
+
+
+//practice exercise
+const checkBaggage = function (items){
+  const baggage = items.toLowerCase();
+  if(baggage.includes('knnife') || baggage.includes('gun')){
+    console.log('you are not allowed on board')
+  } else {
+    console.log('welcome on board')
+  }
+}
+checkBaggage('i have a laptop,some food and a pocket knife');
+checkBaggage('socks camera');
+checkBaggage('got some snacks and a gun for protection');
+
+//SPLIT
+//creates a new array
+console.log('a+very+nice+string'.split('+'));
+const [firtsName, lastName] = 'Balla Istvan'.split(' ');
+
+//JOIN
+const newName = ['Mr.', firtsName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function(name){
+  const names = name.split(' ');
+  const namesUpper = [];
+  for(const word of names){
+    // namesUpper.push(word[0].toUpperCase() + word.slice(1));
+    namesUpper.push(word.replace(word[0], word[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+}
+capitalizeName('jessica ann smith davis');
+capitalizeName('balla istvan');
+
+//Padding
+const message = 'go to gate 23!';
+console.log(message.padStart(25, '+'));
+console.log('Pityke'.padStart(23, '+'));
+//Padend
+console.log(message.padStart(20, '+').padEnd(30), '+');
+
+
+const maskCreditCard = function(number){
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*')
+}
+console.log(maskCreditCard(3463282386748962));
+console.log(maskCreditCard('12387468321748'));
+
+//Repeat
+const message2 = 'Bad weather... All departures delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function(n){
+  console.log(`there are ${n} planes in line ${plane.repeat(n)}`)
+}
+planesInLine(4);
+planesInLine(12);
