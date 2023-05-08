@@ -84,16 +84,68 @@
 // }
 // document.body.addEventListener('click', high5);
 
-const greet = function(greeting){
-    return function(name){
-        console.log(`${greeting} ${name}`)
-    }
+// const greet = function(greeting){
+//     return function(name){
+//         console.log(`${greeting} ${name}`)
+//     }
+// }
+// const greeterHey = greet('Hey');
+// greeterHey('Pityke');
+
+// greet('hello')('Pityke')
+
+// //Challange
+// const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+// greetArr('hi')('pityke')
+
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    //book: function(){}
+    book(flightNumber, name){
+        console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNumber}`);
+        this.bookings.push({flight: `${this.iataCode}${flightNumber}`, name})
+    },
 }
-const greeterHey = greet('Hey');
-greeterHey('Pityke');
 
-greet('hello')('Pityke')
+lufthansa.book(239, 'Balla Istvan');
+lufthansa.book(635, 'Mike Smith');
+console.log(lufthansa);
 
-//Challange
-const greetArr = greeting => name => console.log(`${greeting} ${name}`);
-greetArr('hi')('pityke')
+const eurowings = {
+    name: 'Euro Wings',
+    iataCode: 'EW',
+    bookings: [],
+
+};
+
+const book = lufthansa.book;
+
+//does not work
+//book(23, 'Sarah williams);
+
+
+//call method
+book.call(eurowings, 23, 'Sarah Williams');//call method on book function with THIS keyword set to EUROWINGS in the first argument
+console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Cooper');
+console.log(lufthansa);
+
+const swiss = {
+    airline: 'Swiss Air Lines',
+    iataCode: 'LX',
+    bookings: [],
+};
+book.call(swiss, 587, 'Bolond Lajos');
+console.log(swiss);
+
+
+//apply method
+const flightData = [738, 'George Cooper'];
+book.apply(swiss, flightData);
+console.log(swiss);
+
+book.call(swiss, ...flightData);
+console.log(swiss)
