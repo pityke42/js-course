@@ -90,4 +90,10 @@ const greet = function(greeting){
     }
 }
 const greeterHey = greet('Hey');
-greeterHey('Pityke')
+greeterHey('Pityke');
+
+greet('hello')('Pityke')
+
+//Challange
+const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+greetArr('hi')('pityke')
