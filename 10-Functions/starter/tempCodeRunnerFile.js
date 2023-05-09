@@ -1,2 +1,1 @@
-const flightNum = flight;
-// const passenger = pityke;
+() => console.log('This also will never run again');
