@@ -292,17 +292,18 @@
 
 //coding challange 2.
 
-(function(){
-    const header = document.querySelector('h1');
-    header.style.color = 'red';
-    // header.addEventListener('click', (function(){
-    //     header.style.color = 'blue';
-    // }))
+// (function(){
+//     const header = document.querySelector('h1');
+//     header.style.color = 'red';
 
-    document.querySelector('body').addEventListener('click', function(){
-        header.style.color = 'blue';
-    })
-})();
+//     // header.addEventListener('click', (function(){
+//     //     header.style.color = 'blue';
+//     // }))
+
+//     document.querySelector('body').addEventListener('click', function(){
+//         header.style.color = 'blue';
+//     })
+// })();
 
 
 
