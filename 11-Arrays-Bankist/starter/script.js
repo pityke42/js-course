@@ -13,21 +13,21 @@ const account1 = {
 };
 
 const account2 = {
-  owner: 'Jessica Davis',
+  owner: 'Balla Istvan',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: 'Steven Thomas Williams',
+  owner: 'Rebeka Toth',
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: 'Sarah Smith',
+  owner: 'Horvath Balint',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
@@ -62,6 +62,31 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
+const displayMovements = function(movements){
+  //.textContent = 0;
+containerMovements.innerHTML = ''; 
+
+  movements.forEach(function(mov, i){
+    //actions type
+    const type = mov > 0 ? 'deposit' : 'withdrawl';
+    //displaying actions types
+    const html = `
+    <div class="movements__row">
+    <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+    <div class="movements__value">${mov}</div>
+  </div>`;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html)
+  });
+};
+displayMovements(account1.movements);
+console.log(containerMovements.innerHTML)
+
+
+
+
+
+
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -145,7 +170,6 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
  //0: function(200);
  //1: function(450);
  //2: function(-400);
- */
 
  //MAP
  const currencies = new Map([
@@ -163,4 +187,6 @@ const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
 console.log(currenciesUnique);
 currenciesUnique.forEach(function(value, _, set){
   console.log(`${_}: ${value}`);
-})
+});
+ */
+
