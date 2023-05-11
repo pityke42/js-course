@@ -81,6 +81,15 @@ containerMovements.innerHTML = '';
 };
 displayMovements(account1.movements);
 
+
+const calcDisplayBalance = function(movements){
+  const balance = movements.reduce((acc, cur) => {
+    return acc + cur;
+  });
+  labelBalance.textContent = `${balance} EUR`
+};
+calcDisplayBalance(account1.movements)
+
 const createUserNames = function(account){
   account.forEach(acc => {
     acc.username = acc.owner.toLowerCase().split(' ').map(word => {
@@ -90,6 +99,7 @@ const createUserNames = function(account){
 };
 createUserNames(accounts);
 console.log(accounts);
+
 
 
 
@@ -241,7 +251,7 @@ const movementsDescriptions = movements.map((mov, i) => {
 
 });
 console.log(movementsDescriptions);
- */
+
 
 //FILTER//////////////////////////////////////
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -252,15 +262,44 @@ const deposits = movements.filter(mov => {
 
 console.log(movements);
 console.log(deposits);
-const depositsFor = [];
-for(const mov of movements){
-  if(mov > 0){
-    depositsFor.push(mov)
-  }
-}
-console.log(depositsFor);
+
 
 const withdrawls = movements.filter(mov => {
   return mov < 0;
 });
 console.log(withdrawls);
+
+ */
+//////REDUCE/////////////////////////////////////////////
+//accumulator is like a snowball collects for itselt
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const balance = movements.reduce(function(accumulator, currentValue, index, array){
+  console.log(`Iteration ${index}: ${accumulator}`);
+   return accumulator + currentValue;
+}, 0);
+console.log(balance);
+
+
+//second argument in the REDUCE callback function now set to 100!!!!!! so the starting value is counts from 100
+const balance2 = movements.reduce(function(accumulator, currentValue, index, array){
+  console.log(`Iteration ${index}: ${accumulator}`);
+   return accumulator + currentValue;
+}, 100);
+console.log(balance2);
+
+let balance3 = 0;
+for(const mov of movements){
+  balance3 += mov;
+};
+console.log(balance3);
+
+//maximum value of movements array
+const max = movements.reduce((acc, mov) => {
+  if(acc > mov){
+    return acc;
+  } else {
+    return mov;
+  }
+}, movements[0]);
+
+console.log(max)

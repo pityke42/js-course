@@ -1,1 +1,1 @@
-return 
+console.log(balance3);
