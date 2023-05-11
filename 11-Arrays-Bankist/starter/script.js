@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -80,7 +80,6 @@ containerMovements.innerHTML = '';
   });
 };
 displayMovements(account1.movements);
-console.log(containerMovements.innerHTML)
 
 
 
@@ -99,7 +98,7 @@ console.log(containerMovements.innerHTML)
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-/*
+
 
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
@@ -189,4 +188,29 @@ currenciesUnique.forEach(function(value, _, set){
   console.log(`${_}: ${value}`);
 });
  */
+//coding challange 1.
+//Test Data 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3];
+//Test data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4];
 
+const juliaData1 = [3, 5, 2, 12, 7];
+const kateData1 = [4, 1, 15, 8, 3];
+const juliaData2 = [9, 16, 6, 8, 3];
+const kateData2 = [10, 5, 6, 1, 4];
+
+const ageCheck = function(jDog, kDog){
+  //1.
+  const removeCats = jDog.slice(1, -2);
+  //2.
+  const sumDogs = removeCats.concat(kDog);
+  //3.
+  sumDogs.forEach(function (dog, index) {
+    if(dog >= 3){
+      console.log(`Dog number ${index + 1} is an adult, and it is ${dog} years old`)
+    } else {
+      console.log(`Dog number ${index + 1} is still a puppy`)
+    }
+  });
+  return;
+};
+ageCheck(juliaData1, kateData1);
+ageCheck(juliaData2, kateData2);
