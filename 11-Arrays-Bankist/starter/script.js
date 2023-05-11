@@ -1,5 +1,5 @@
 'use strict';
-/*
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -81,11 +81,20 @@ containerMovements.innerHTML = '';
 };
 displayMovements(account1.movements);
 
+const createUserNames = function(account){
+  account.forEach(acc => {
+    acc.username = acc.owner.toLowerCase().split(' ').map(word => {
+      word[0]
+    }).join('');
+  });
+};
+createUserNames(accounts);
+console.log(accounts);
 
 
 
 
-
+/*
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -187,7 +196,7 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function(value, _, set){
   console.log(`${_}: ${value}`);
 });
- */
+
 //coding challange 1.
 //Test Data 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3];
 //Test data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4];
@@ -203,7 +212,7 @@ const ageCheck = function(jDog, kDog){
   //2.
   const sumDogs = removeCats.concat(kDog);
   //3.
-  sumDogs.forEach(function (dog, index) {
+  sumDogs.forEach(function(dog, index) {
     if(dog >= 3){
       console.log(`Dog number ${index + 1} is an adult, and it is ${dog} years old`)
     } else {
@@ -214,3 +223,22 @@ const ageCheck = function(jDog, kDog){
 };
 ageCheck(juliaData1, kateData1);
 ageCheck(juliaData2, kateData2);
+
+
+
+//MAP//////////////////////////////////////////////////////////////
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd = 1.1;
+
+const movementsUSD = movements.map(mov => {
+  return mov * eurToUsd;
+})
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsDescriptions = movements.map((mov, i) => {
+  return `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`;
+
+});
+console.log(movementsDescriptions);
+ */
