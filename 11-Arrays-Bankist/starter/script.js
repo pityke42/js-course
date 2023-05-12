@@ -248,13 +248,12 @@ console.log(movementsUSD);
 
 const movementsDescriptions = movements.map((mov, i) => {
   return `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${mov}`;
-
 });
 console.log(movementsDescriptions);
 
 
 //FILTER//////////////////////////////////////
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const deposits = movements.filter(mov => {
   return mov > 0;
@@ -269,10 +268,10 @@ const withdrawls = movements.filter(mov => {
 });
 console.log(withdrawls);
 
- */
+
 //////REDUCE/////////////////////////////////////////////
 //accumulator is like a snowball collects for itselt
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 const balance = movements.reduce(function(accumulator, currentValue, index, array){
   console.log(`Iteration ${index}: ${accumulator}`);
    return accumulator + currentValue;
@@ -301,5 +300,28 @@ const max = movements.reduce((acc, mov) => {
     return mov;
   }
 }, movements[0]);
-
-console.log(max)
+console.log(max);
+ */
+// coding challange 2.
+// TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+// TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+const data1 = [5, 2, 4, 1, 15, 8, 3];
+const data2 = [16, 6, 10, 5, 6, 1, 4];
+const datas = data1.concat(data2);
+//1.
+const calcAge = datas.map(age => {
+  return age <= 2 ? age * 2 : 16 + age * 4;
+});
+console.log(calcAge)
+//2.
+const ageFilter = calcAge.filter(age => {
+  return age >= 18;
+});
+console.log(ageFilter);
+//3.
+const adultDogs = calcAge.filter(age => {
+  return age > 18;
+});
+console.log(adultDogs);
+const calcAverage = adultDogs.reduce((acc, age) => (acc + age)) / adultDogs.length;
+console.log(calcAverage);

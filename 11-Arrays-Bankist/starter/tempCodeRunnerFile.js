@@ -1,1 +1,3 @@
-console.log(balance3);
+const ageFilter = datas.filter(age => {
+
+// })
