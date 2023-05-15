@@ -1,6 +1,6 @@
 'use strict';
 
-/*
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -35,7 +35,7 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
-
+/*
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -63,6 +63,8 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
+
+
 const displayMovements = function(movements){
   //.textContent = 0;
 containerMovements.innerHTML = ''; 
@@ -130,6 +132,14 @@ const calcDisplaySummary = function(movements){
   labelSumInterest.textContent = `${interest}€`
 }
 calcDisplaySummary(account1.movements);
+
+
+
+
+
+
+
+
 
 /////////////////////////////////////////////////
 // LECTURES
@@ -349,7 +359,7 @@ const adultDogs = calcAge.filter(age => {
   return age > 18;
 });
 console.log(adultDogs);
-const calcAverage = adultDogs.reduce((acc, age) => (acc + age)) / adultDogs.length;
+const calcAverage = adultDogs.reduce((acc, age, i, arr) => acc + curr / arr.length );
 console.log(calcAverage);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -366,7 +376,7 @@ const totalDepositUSD = movements.filter(mov => mov > 0)
 
 .reduce((acc, mov) => acc + mov, 0); 
 console.log(totalDepositUSD);
- */
+
 // TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 // TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 const calcAverageHumanAge = function(age){
@@ -382,3 +392,21 @@ const calcAverageHumanAge = function(age){
 }
 console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
+ */
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const firstWithdrawl = movements.find(mov => mov < 0);
+// console.log(firstWithdrawl);
+
+// console.log(accounts);
+
+
+// const account = accounts.find(acc => acc.owner === 'Rebeka Toth');
+// console.log(account)
+
+
+for(const acc of accounts.entries()){
+  if (acc.owner === 'Rebeka Toth'){
+    console.log(acc.owner)
+  }
+}

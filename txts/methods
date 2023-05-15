@@ -8,3 +8,6 @@ function.apply()
 function.bind()
 
 forEach()   is avaliable for MAPS and SETS
+
+
+.find() //only returns an element itself NOT WITH A NEW ARRAY
