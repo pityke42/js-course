@@ -35,7 +35,7 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
-/*
+
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -82,7 +82,6 @@ containerMovements.innerHTML = '';
     containerMovements.insertAdjacentHTML('afterbegin', html)
   });
 };
-displayMovements(account1.movements);
 
 
 const calcDisplayBalance = function(movements){
@@ -91,36 +90,24 @@ const calcDisplayBalance = function(movements){
   });
   labelBalance.textContent = `${balance}€`
 };
-calcDisplayBalance(account1.movements)
-
-const createUserNames = function(account){
-  account.forEach(acc => {
-    acc.username = acc.owner
-    .toLowerCase()
-    .split(' ').map(word => {
-      word[0]
-    }).join('');
-  });
-};
-createUserNames(accounts);
-console.log(accounts);
 
 
-const calcDisplaySummary = function(movements){
+
+const calcDisplaySummary = function(acc){
   //incomes
-  const incomes = movements
+  const incomes = acc.movements
   .filter(mov => mov > 0)
   .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes}€`;
 
   //withdraws
-  const out = movements
+  const out = acc.movements
   .filter(mov => mov < 0)
   .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  const interest = movements.filter(mov => mov > 0)
-  .map(deposit => deposit * 1.2 / 100)
+  const interest = acc.filter(mov => mov > 0)
+  .map(deposit => deposit * acc.interestRate / 100)
   //second reduce is for interests over 1 €
   //this filter removes numbers under 1 €
   .filter((int, i, arr) => {
@@ -131,7 +118,56 @@ const calcDisplaySummary = function(movements){
   .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest}€`
 }
-calcDisplaySummary(account1.movements);
+
+
+
+const createUserNames = function(account){
+  account.forEach(acc => {
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(' ')
+    .map(word => word[0])
+    .join('');
+  });
+};
+createUserNames(accounts);
+
+//Event Handlers
+let currentAccount;
+
+btnLogin.addEventListener('click', function(e){
+  //Prevent form ffrom submitting
+  e.preventDefault();
+  
+
+  //Find the accounts
+
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  console.log(currentAccount);
+
+  //Pin code
+  if(currentAccount?.pin === Number(inputLoginPin.value)){
+    //Display UI and welcome message
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+
+    //changing opacity gives us the login feel
+    containerApp.style.opacity = 100;
+
+
+    //Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    //Display movements
+    displayMovements(currentAccount.movements);
+
+    //Display balance
+    calcDisplayBalance(currentAccount.movements);
+
+    //Display summary
+    calcDisplaySummary(currentAccount.movements);
+  }
+});
 
 
 
@@ -140,6 +176,11 @@ calcDisplaySummary(account1.movements);
 
 
 
+
+
+
+
+/*
 
 /////////////////////////////////////////////////
 // LECTURES
@@ -392,21 +433,14 @@ const calcAverageHumanAge = function(age){
 }
 console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
- */
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-// const firstWithdrawl = movements.find(mov => mov < 0);
-// console.log(firstWithdrawl);
+const firstWithdrawl = movements.find(mov => mov < 0);
+console.log(firstWithdrawl);
 
-// console.log(accounts);
+console.log(accounts);
 
+const account = accounts.find(acc => acc.owner === 'Rebeka Toth');
+console.log(account);
+ */
 
-// const account = accounts.find(acc => acc.owner === 'Rebeka Toth');
-// console.log(account)
-
-
-for(const acc of accounts.entries()){
-  if (acc.owner === 'Rebeka Toth'){
-    console.log(acc.owner)
-  }
-}
