@@ -2,6 +2,8 @@
 
 
 /////////////////////////////////////////////////
+
+/*
 /////////////////////////////////////////////////
 // BANKIST APP
 
@@ -183,10 +185,8 @@ btnTransfer.addEventListener('click', function (e) {
   );
   console.log(amount, receiverAcc);
 
-
     //clear input field
     inputTransferAmount.value = inputTransferTo.value = '';
-
 
   if (
     amount > 0 &&
@@ -204,6 +204,25 @@ btnTransfer.addEventListener('click', function (e) {
 
 
 });
+
+
+btnLoan.addEventListener('click', function(event){
+  event.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)){
+    
+    //add Movement
+    currentAccount.movements.push(amount);
+
+    //update UI
+    updateUi(currentAccount);
+
+    inputLoanAmount.value = '';
+  }
+  
+})
 
 
 //delete/close button/account
@@ -232,7 +251,7 @@ btnClose.addEventListener('click', function(event){
 
 
 
-/*
+
 
 /////////////////////////////////////////////////
 // LECTURES
@@ -495,4 +514,20 @@ console.log(accounts);
 const account = accounts.find(acc => acc.owner === 'Rebeka Toth');
 console.log(account);
  */
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
 
+
+//SOME
+
+//cheks EQUALITY
+console.log(movements.includes(-130));
+
+//checks CONDITION
+console.log(movements.some(mov => mov === -130));
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits);
+
+
+//EVERY
+console.log(movements.every(mov => mov > 0))
