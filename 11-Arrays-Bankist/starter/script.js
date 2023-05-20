@@ -2,8 +2,6 @@
 
 
 /////////////////////////////////////////////////
-
-
 /////////////////////////////////////////////////
 // BANKIST APP
 
@@ -67,11 +65,15 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 
 
-const displayMovements = function(movements){
+const displayMovements = function(movements, sort = false){
   //.textContent = 0;
 containerMovements.innerHTML = ''; 
 
-  movements.forEach(function(mov, i){
+//this sets the second parameters value to display the movements in an ascending order
+const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  //looping trought the sorted array
+  movs.forEach(function(mov, i){
     //actions type
     const type = mov > 0 ? 'deposit' : 'withdrawl';
     //displaying actions types
@@ -246,13 +248,24 @@ btnClose.addEventListener('click', function(event){
 });
 
 
+//sorting button
+let sortedState = false;
+btnSort.addEventListener('click', function(event){
+  event.preventDefault();
 
-
-
-
+  //display the sorted movements
+  displayMovements(currentAccount.movements, !sortedState);
+  sortedState = !sortedState;
+  // displayMovements(currentAccount.movements, !sortedState ? true : false); I GOT THE RIGHT SOLUTION WIHT TERNARY OPERATOR
+})
 
 
 /*
+
+
+
+
+
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -513,7 +526,7 @@ console.log(accounts);
 
 const account = accounts.find(acc => acc.owner === 'Rebeka Toth');
 console.log(account);
- */
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 console.log(movements);
 
@@ -574,3 +587,94 @@ console.log(accountMovements);
  .flatMap(acc => acc.movements)
  .reduce((acc, cur) => acc + cur, 0);
  console.log(chainBalance2);
+
+
+ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+
+ //SORT
+ //SORT METHOD MUTATES THE ORIGINAL ARRAY
+ const owners = ['jonas', 'zach', 'adam', 'martha'];
+ console.log(owners.sort());
+ console.log(owners);
+
+ //numbers
+ console.log(movements);
+console.log(movements.sort()); //sorting by the first characters
+//get the riht solution
+
+
+
+//SORT
+//return < 0, A, B --> returning positive value keeping the order
+//return > 0, A, B --> returning a minus value switching the order
+
+//sorting for ascending order(line)
+movements.sort((a, b) => a - b);
+// movements.sort((a, b) => {
+//   if(a > b) return 1;
+//   if(a < b) return -1;
+// });
+console.log(movements);
+
+//sorting for descending order(line) changing the returnable numbers
+movements.sort((a, b) => b - a);
+// movements.sort((a, b) => {
+//   if(a > b) return -1;
+//   if(a < b) return 1;
+// });
+console.log(movements);
+*/
+
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log([1, 2, 3, 4, 5, 6, 7]);
+console.log(new Array([1, 2, 3, 4, 5, 6, 7]));
+
+
+//new Array method creates a fully empty array with seven place (lenght) 
+//
+const x = new Array(7);
+console.log(x);
+
+//with FILL method we can fill the empty places 
+//FILL method first parameter ->what we want to place
+//FILL method second parameter -> where we want to start filling (begin parameter)
+//FILL method third parameter ->where we want to end (end parameter)
+
+x.fill(1, 3, 5);
+console.log(x);
+
+//can call on NOT EMPTY ARRAYS
+arr.fill(23, 2, 6);
+console.log(arr);
+
+
+//ARRAY.FROM////LIKE MAP method
+const  y = Array.from({length: 7}, 
+  function(){
+  return 1;
+});
+console.log(y);
+
+const z = Array.from({length: 7}, (currentElement, currentIndex) => currentIndex + 1);
+console.log(z);
+
+
+//mini coding challange // 100 random dice roll
+const k = Array.from({length: 100}, function(){
+  return Math.trunc(Math.random() * 6 );
+});
+console.log(k);
+
+
+
+
+labelBalance.addEventListener('click', function(){
+
+   const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+
+});

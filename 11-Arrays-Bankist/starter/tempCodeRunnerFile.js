@@ -1,1 +1,2 @@
- receiverAcc &&
+
+console.log(movements);
