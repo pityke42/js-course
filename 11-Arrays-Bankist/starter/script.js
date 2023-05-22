@@ -35,7 +35,7 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
-
+/*
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -260,7 +260,7 @@ btnSort.addEventListener('click', function(event){
 })
 
 
-/*
+
 
 
 
@@ -624,7 +624,7 @@ movements.sort((a, b) => b - a);
 //   if(a < b) return 1;
 // });
 console.log(movements);
-*/
+
 
 const arr = [1, 2, 3, 4, 5, 6, 7];
 console.log([1, 2, 3, 4, 5, 6, 7]);
@@ -677,4 +677,96 @@ labelBalance.addEventListener('click', function(){
   );
   console.log(movementsUI);
 
+  //another solution
+  // const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+
 });
+
+
+//1.
+const bankDepositSum = accounts
+.flatMap(acc => acc.movements)
+.filter(mov => mov > 0)
+.reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
+//2/without filter by using reduce
+ const numDeposits1000 = accounts
+ .flatMap(acc => acc.movements)
+ .reduce((acc, cur) => cur >= 1000 ? ++acc : acc, 0)
+//  .reduce((acc, cur) => cur >= 1000 ? acc + 1 : acc, 0);
+ console.log(numDeposits1000);
+
+ let a = 10;
+ console.log(a++);
+ //3.
+ //put the values in an object
+ const sums = accounts.flatMap(acc => acc.movements).reduce((acc, cur) => {
+  cur > 0 ? acc.depostis += cur : acc.withdrawals += cur;
+  return acc;
+ }, {depostis: 0, withdrawals: 0});
+ console.log(sums)
+
+ const {deposits, withdrawals} = accounts
+ .flatMap(acc => acc.movements)
+ .reduce((acc, cur) => {
+  acc[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+  return acc;
+ }, {deposits: 0, withdrawals: 0});
+ console.log(deposits, withdrawals);
+ //4.
+ //this is a nice title --> This Is a Nice Title
+ const convertTitleCase = function(title){
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'end'];
+
+  const titleCase = title
+  .toLowerCase()
+  .split(' ')
+  .map(word => exceptions.includes(word) ? word : word[0].toUpperCase() + word.slice(1))
+  .join(' ');
+  return capitalize(titleCase);
+ }
+
+ console.log(convertTitleCase('this is a nice title'));
+ console.log(convertTitleCase('this is a LONG title BuT not TOO loNg'));
+ */
+
+//test data
+ const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] }
+];
+ //coding challange 4.
+ //1.
+dogs.forEach(dog => (dog.recomFood = Math.trunc(dog.weight ** 0.75 * 28)));
+//2.
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(`sarahs dog is eating ${dogSarah.curFood > dogSarah.recomFood ? 'much' : 'too litle'}`);
+//3.
+const ownersEatTooMuch = dogs
+.filter(dog => dog.curFood > dog.recomFood)
+.flatMap(dog => dog.owners);
+const ownersEatTooLittle = dogs
+.filter(dog => dog.curFood < dog.recomFood)
+.flatMap(dog => dog.owners);
+console.log(ownersEatTooMuch, ownersEatTooLittle);
+//4.
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs aet too much`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs aet too little`);
+//5.
+console.log(dogs.some(dog => dog.curFood === dog.recomFood));
+//6.
+// console.log(dogs.some(dog => dog.curFood > dog.recomFood * 0.9 && dog.curFood < dog.recomFood * 1.1));
+const checkOkay = dog => dog.curFood > dog.recomFood * 0.9 && dog.curFood < dog.recomFood * 1.1;
+console.log(dogs.some(checkOkay))
+//7.
+console.log(dogs.filter(checkOkay));
+//8.
+const sortPortion = dogs
+.slice()
+.sort((a, b) => a.recomFood - b.recomFood)
+console.log(sortPortion)
+

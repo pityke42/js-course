@@ -16,3 +16,47 @@ forEach()   is avaliable for MAPS and SETS
 
 
 preventDefault();
+
+.flat();   removes the nested array, gives the full array, flatening the original (nested) array
+.flatMap();   //combined method FLAT+MAP
+
+node list is an array like structure -> iterable
+
+
+
+//Array methods 23
+/To mutate the original array
+_add to original array
+-push();
+-unshift();
+_remove from orgiginal array
+-pop();
+-shift();
+-splice();
+_other
+-reverse();
+-sort();
+-fill();
+/To create a new array
+-map();
+-filter();
+-slice();
+-concat();
+-flat();
+-flatMap();
+/To get an index
+-indexOf();
+-findIndex();
+/Get an array element
+-find();
+/To know if array includes(boolian values)
+-indcludes();
+-some();
+-every();
+//Transform array to a new string 
+-join();
+//Transform an array for a value
+-reduce();
+
+
+++ operator increment a value that returns the previous value

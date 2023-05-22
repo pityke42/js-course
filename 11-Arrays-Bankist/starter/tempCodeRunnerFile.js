@@ -1,2 +1,1 @@
-
-console.log(movements);
+dogs.filter(do)
