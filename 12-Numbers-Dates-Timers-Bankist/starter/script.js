@@ -290,7 +290,7 @@ console.log(Number.isFinite(23 / 0));
 console.log(Number.isInteger(23))
 console.log(Number.isInteger(23.0))
 console.log(Number.isInteger(23 / 0))
-*/
+
 
 console.log(Math.sqrt(25));
 console.log(25 ** (1 / 2));
@@ -325,9 +325,49 @@ console.log((2.7).toFixed(0));
 console.log((2.7).toFixed(3));
 console.log((2.345).toFixed(2));
 console.log(-(2.345).toFixed(2));
+*/
+//Remainder operator
+console.log(5 % 2);
+console.log(5 / 2);// 5 = 2 *  2 + 1;
+
+console.log(8 % 3);
+console.log(8 / 3);
+
+console.log(6 % 2);
+console.log(6 / 2);
+
+console.log(7 % 2);
+console.log(7 / 2);
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(9));
 
 
 
+labelBalance.addEventListener('click', function(){
+  [...document.querySelectorAll('.movements__row')].forEach(function(row, i){
+    if(i % 2 === 0){
+      row.style.backgroundColor = 'orangered';
+    }
+    if(i % 3 === 0){
+      row.style.backgroundColor = 'blue';
+    }
+  })
+})
+
+//Numeric separators
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const priceCents = 345_99;
+console.log(priceCents);
 
 
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
 
+const PI = 3.14_15;
+console.log(PI);
+
+console.log(Number('230_000'));
+console.log(parseInt('230_000'));
