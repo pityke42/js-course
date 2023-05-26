@@ -5,9 +5,14 @@
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
+//buttons
+const btnScrollTo = document.querySelector('.btn--scroll-to');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+//sections
 const allSection = document.querySelectorAll('.section');
+const section1 = document.querySelector('#section--1');
+
 const header = document.querySelector('.header');
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -32,8 +37,36 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+//EventListeners
+btnScrollTo.addEventListener('click', function(e){
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
 
+  //Getting the coordinates for scrolling
+  console.log(e.target.getBoundingClientRect());
 
+  //coordinates of the viewport
+  // console.log('Current scroll (X/Y)', window.pageXOffset, pageYOffset);
+  // console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+  //Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset,
+  //    );
+  
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({
+    behavior: "smooth",
+  })
+});
+////////////////////////////////////////////////////////////////////////////////////////
+/*
 //Selecting elements
 console.log(document.documentElement);
 console.log(document.head);
@@ -72,7 +105,7 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function(
  message.style.backgroundColor = '#37383d';
  message.style.width = '120%';
 
- console.log(message.style.backgroundColor)
+ console.log(message.style.backgroundColor);
  console.log(message.style.color);
  console.log(getComputedStyle(message).color);
  console.log(getComputedStyle(message).height);
@@ -106,7 +139,17 @@ console.log(link2.href);
 console.log(link2.getAttribute('href'));
 
 //Data Attributes
-console.log(logo.dataset.versionNumber)
+console.log(logo.dataset.versionNumber);
+
+//Classes
+logo.classList.add();
+logo.classList.remove();
+logo.classList.toggle();
+logo.classList.contains();//not includes()
+
+//dont use this//overwrite everything
+logo.className = 'jonas';
+*/
 
 
 
