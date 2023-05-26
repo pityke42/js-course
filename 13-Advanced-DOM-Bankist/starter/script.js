@@ -7,19 +7,22 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-
+const allSection = document.querySelectorAll('.section');
+const header = document.querySelector('.header');
 const openModal = function () {
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
 };
 
-const closeModal = function () {
+const closeModal = function (e) {
+  e.preventDefault();
   modal.classList.add('hidden');
   overlay.classList.add('hidden');
 };
 
-for (let i = 0; i < btnsOpenModal.length; i++)
-  btnsOpenModal[i].addEventListener('click', openModal);
+//BUTTONS
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -29,3 +32,81 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+
+//Selecting elements
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
+
+document.querySelector('.header');
+
+document.getElementById('section--1');
+const allButtons = document.getElementsByTagName('button');
+console.log(allButtons);
+
+console.log(document.getElementsByClassName('btn'));
+
+//Creating and Inserting elements
+//insertAdjacentHTML
+const message = document.createElement('div');////////////message is a live element live element living in the DOM
+message.classList.add('cookie-message');
+message.textContent = 'We use cookies for improved functionality and analytics.';
+message.innerHTML = 'We use cookies for improved functionality and analytics.<button class="btn btn--close-cookie">Got it!</button>';
+
+// header.prepend(message);
+header.append(message);
+// header.append(message.cloneNode(true));/////child element also be copied
+
+header.before(message);
+// header.after(message);
+
+//Delete element
+document.querySelector('.btn--close-cookie').addEventListener('click', function(){
+  // message.remove();
+  message.parentElement.removeChild(message);/////DOM TRAVERSING (moving in the DOM tree)
+});
+
+
+//STYLES
+ message.style.backgroundColor = '#37383d';
+ message.style.width = '120%';
+
+ console.log(message.style.backgroundColor)
+ console.log(message.style.color);
+ console.log(getComputedStyle(message).color);
+ console.log(getComputedStyle(message).height);
+
+ message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+ //CSS variables (custom properties)//
+ document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+ //Attributes
+ const logo = document.querySelector('.nav__logo');
+ console.log(logo.src); 
+ console.log(logo.alt);
+ console.log(logo.className);
+logo.alt = 'Beautiful, minimalist logo';
+
+ //Non standart( does not work)
+ console.log(logo.designer);
+
+ console.log(logo.getAttribute('designer'));
+ logo.setAttribute('company', 'Bankist');
+ 
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.twitter-link');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+const link2 =document.querySelector('.nav__link--btn');
+console.log(link2.href);
+console.log(link2.getAttribute('href'));
+
+//Data Attributes
+console.log(logo.dataset.versionNumber)
+
+
+
