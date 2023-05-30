@@ -82,6 +82,8 @@ btnScrollTo.addEventListener('click', function(e){
     
 //     
 // });
+
+
 //Event delegation
 //1.Add event listener to common parent element
 //2.Determine what element originated the event
@@ -95,9 +97,32 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
   }
 });
 
+//Tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
 
+tabsContainer.addEventListener('click', function(e){
+  //Selecting the tabs
+  const clicked = e.target.closest('.operations__tab');
+  
+  //Ignore when click cause null//Guard clause
+  if(!clicked) return;
+  // if(!clicked){
+  //   clicked.classList.toggle('operations__tab--active')
+  // };
 
+  //Activating tabs
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
 
+  //Activating containers
+  tabsContent.forEach(content => content.classList.remove('operations__content--active'));
+
+  //Activate content area
+  console.log(clicked.dataset.tab)
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+});
 
 
 
@@ -235,5 +260,36 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
 document.querySelector('.nav').addEventListener('click', function(e){
   this.style.backgroundColor= randomColour();
   console.log('NAV', e.target, e.currentTarget);
+});
+
+///////////DOM TRAVERSING/////////////////////////////
+//Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.children);
+console.log(h1.childNodes);
+
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
+
+//Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+//Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function(el){
+  if(el !== h1){
+    el.style.transform = 'scale(0.5)';
+    
+  }
 });
 */
