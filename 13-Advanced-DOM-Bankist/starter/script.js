@@ -1,7 +1,5 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
 
 const h1 = document.querySelector(' h1');
 const modal = document.querySelector('.modal');
@@ -15,6 +13,10 @@ const allSection = document.querySelectorAll('.section');
 const section1 = document.querySelector('#section--1');
 
 const header = document.querySelector('.header');
+///////////////////////////////////////
+
+
+// Modal window
 const openModal = function () {
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
@@ -26,9 +28,12 @@ const closeModal = function (e) {
   overlay.classList.add('hidden');
 };
 
+
+
+
+
 //BUTTONS
 btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
-
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -38,12 +43,14 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
-//EventListeners
+
+
+//Button Scrolling
 btnScrollTo.addEventListener('click', function(e){
   const s1coords = section1.getBoundingClientRect();
   console.log(s1coords);
 
-  //Getting the coordinates for scrolling
+//Getting the coordinates for scrolling
   console.log(e.target.getBoundingClientRect());
 
   //coordinates of the viewport
@@ -67,26 +74,29 @@ btnScrollTo.addEventListener('click', function(e){
   })
 });
 
+//Page Navigation
+///////////(EVENT DELEGATION)////////////
+// document.querySelectorAll('.nav__link').forEach(function(el){
+//   el.addEventListener('click', function(e){
 
-const alertH1 = function(e){
-  alert('addEventListener: Great! You are reading a heading')
+    
+//     
+// });
+//Event delegation
+//1.Add event listener to common parent element
+//2.Determine what element originated the event
+document.querySelector('.nav__links').addEventListener('click', function(e){
+  e.preventDefault();
 
-  //deleting eventlistener
-  h1.removeEventListener('mouseenter', alertH1);
+  //Matching strategy
+  if(e.target.classList.contains('nav__link')){
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({behavior: 'smooth'});
+  }
+});
 
-}
-
-h1.addEventListener('mouseenter', alertH1);
 
 
-//deleting eventlistener after 3 seconds
-setTimeout(() => {
-  h1.removeEventListener('mouseenter', alertH1)
-}, 3000);
-
-// h1.onmouseenter = function(e){
-//   alert('addEventListener: Great! You are reading a heading')
-// };//oldschool one
 
 
 
@@ -179,7 +189,51 @@ logo.classList.contains();//not includes()
 
 //dont use this//overwrite everything
 logo.className = 'jonas';
+
+const alertH1 = function(e){
+  alert('addEventListener: Great! You are reading a heading')
+
+  //deleting eventlistener
+  h1.removeEventListener('mouseenter', alertH1);
+
+}
+
+h1.addEventListener('mouseenter', alertH1);
+
+
+//deleting eventlistener after 3 seconds
+setTimeout(() => {
+  h1.removeEventListener('mouseenter', alertH1)
+}, 3000);
+
+// h1.onmouseenter = function(e){
+//   alert('addEventListener: Great! You are reading a heading')
+// };//oldschool one
+
+
+
+
+///Event Propagation///Bubbling and Capturing
+//rgb(255, 255, 255)
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+const randomColour = () => `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+console.log(randomColour(0, 255));
+
+
+document.querySelector('.nav__link').addEventListener('click', function(e){
+  this.style.backgroundColor= randomColour();
+  console.log('LINK', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+
+  //Stop Propagation
+  e.stopPropagation();
+});
+document.querySelector('.nav__links').addEventListener('click', function(e){
+  this.style.backgroundColor= randomColour();
+  console.log('CONTAINER', e.target, e.currentTarget);
+});
+document.querySelector('.nav').addEventListener('click', function(e){
+  this.style.backgroundColor= randomColour();
+  console.log('NAV', e.target, e.currentTarget);
+});
 */
-
-
-
