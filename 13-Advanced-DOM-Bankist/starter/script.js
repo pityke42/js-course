@@ -3,6 +3,7 @@
 ///////////////////////////////////////
 // Modal window
 
+const h1 = document.querySelector(' h1');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 //buttons
@@ -65,6 +66,35 @@ btnScrollTo.addEventListener('click', function(e){
     behavior: "smooth",
   })
 });
+
+
+const alertH1 = function(e){
+  alert('addEventListener: Great! You are reading a heading')
+
+  //deleting eventlistener
+  h1.removeEventListener('mouseenter', alertH1);
+
+}
+
+h1.addEventListener('mouseenter', alertH1);
+
+
+//deleting eventlistener after 3 seconds
+setTimeout(() => {
+  h1.removeEventListener('mouseenter', alertH1)
+}, 3000);
+
+// h1.onmouseenter = function(e){
+//   alert('addEventListener: Great! You are reading a heading')
+// };//oldschool one
+
+
+
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////
 /*
 //Selecting elements
