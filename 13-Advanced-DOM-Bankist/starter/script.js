@@ -13,6 +13,11 @@ const allSection = document.querySelectorAll('.section');
 const section1 = document.querySelector('#section--1');
 
 const header = document.querySelector('.header');
+const nav = document.querySelector('.nav');
+//tabs
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
 ///////////////////////////////////////
 
 
@@ -97,11 +102,7 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
   }
 });
 
-//Tabbed component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
+//Tabbed components
 tabsContainer.addEventListener('click', function(e){
   //Selecting the tabs
   const clicked = e.target.closest('.operations__tab');
@@ -120,12 +121,28 @@ tabsContainer.addEventListener('click', function(e){
   tabsContent.forEach(content => content.classList.remove('operations__content--active'));
 
   //Activate content area
-  console.log(clicked.dataset.tab)
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 });
 
+//Menu fade animation
+const handleHover = function(e){
+  if(e.target.classList.contains('nav__link')){
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
 
+    siblings.forEach(el => {
+      if(el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
 
+//Passign an argument into handler
+//fading out to => opacity 0.5
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+//fading back in back to => opactiy 1
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 
 
