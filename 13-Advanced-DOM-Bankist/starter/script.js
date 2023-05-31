@@ -11,6 +11,8 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 //sections
 const allSection = document.querySelectorAll('.section');
 const section1 = document.querySelector('#section--1');
+const section2 = document.querySelector('#section--2');
+const section3 = document.querySelector('#section--3');
 
 const header = document.querySelector('.header');
 const nav = document.querySelector('.nav');
@@ -143,6 +145,58 @@ const handleHover = function(e){
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 //fading back in back to => opactiy 1
 nav.addEventListener('mouseout', handleHover.bind(1));
+
+
+//Sticky naviogation
+const initialCords = section1.getBoundingClientRect()
+console.log(initialCords);
+
+window.addEventListener('scroll', function(e){
+  //Adding sticky class
+  if(window.scrollY > initialCords.top){
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
+
+/*
+//Sticky navigation: Intersection Observer API
+//this callback function is called when the section is threshold % viewable in the browsers window
+const obsCallback = function(entries, observer){
+  entries.forEach(entry => {
+    console.log(entry)
+  })
+};
+
+//(Threshold) section viewable surface in percent
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2, ],
+};
+//1. argument is the wanted to triggered callback function when the //2. arguments options (threshold%) 
+//are avaliable (viewable in the browsers window)
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
+*/
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+const stickyNav = function(enrties){
+  const [entry] = enrties;
+
+  if(!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+
+}
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `${-navHeight}px`,
+
+});
+
+headerObserver.observe(header);
+
 
 
 
