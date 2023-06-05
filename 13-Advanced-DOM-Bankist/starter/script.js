@@ -149,7 +149,6 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 
 //Sticky naviogation
 const initialCords = section1.getBoundingClientRect()
-console.log(initialCords);
 
 window.addEventListener('scroll', function(e){
   //Adding sticky class
@@ -161,6 +160,7 @@ window.addEventListener('scroll', function(e){
 });
 
 /*
+
 //Sticky navigation: Intersection Observer API
 //this callback function is called when the section is threshold % viewable in the browsers window
 const obsCallback = function(entries, observer){
@@ -174,20 +174,19 @@ const obsOptions = {
   root: null,
   threshold: [0, 0.2, ],
 };
-//1. argument is the wanted to triggered callback function when the //2. arguments options (threshold%) 
-//are avaliable (viewable in the browsers window)
 const observer = new IntersectionObserver(obsCallback, obsOptions);
 observer.observe(section1);
 */
+//1. argument is the wanted to triggered callback function when the //2. arguments options (threshold%) 
+//are avaliable (viewable in the browsers window)
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
 const stickyNav = function(enrties){
   const [entry] = enrties;
 
   if(!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 
-}
+};
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
@@ -196,6 +195,34 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 
 headerObserver.observe(header);
+
+//Reveal hidden sections
+const allSections = document.querySelectorAll('.section');
+const revealSection = function(entries, observer){
+  const [entry] = entries;
+  console.log(entry);
+
+
+  if(!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target)
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+
+});
+allSection.forEach(function(section){
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+})
+
+
+
+
+
 
 
 
