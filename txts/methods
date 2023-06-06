@@ -60,3 +60,13 @@ _other
 
 
 ++ operator increment a value that returns the previous value
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////
+DOM
+//For scrolling and revealing things on site --> IntersectionObserver() 189.
