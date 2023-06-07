@@ -1,0 +1,9 @@
+/*
+abstraction is hiding low level details 
+encapsulation keep properies and methods private in the class, these are not accessable from outside of the class, methods can exposed as a publis api
+inheritance child class extends the parent class, properties and methods avaliable to the child class to reuse logic, 
+polymorphism child class can overwrite a method that it inherited from a parent class
+
+prototypal inheritance the prototype contains methods that are accessavle to all objects linked to that prototype
+objects delegate behaviour to the linked prototyp object
+methods are copied from the class to the objects
