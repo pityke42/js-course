@@ -7,3 +7,11 @@ polymorphism child class can overwrite a method that it inherited from a parent 
 prototypal inheritance the prototype contains methods that are accessavle to all objects linked to that prototype
 objects delegate behaviour to the linked prototyp object
 methods are copied from the class to the objects
+
+constructor functions called with the NEW keyword:
+//1. New epmty object is created (new {} is created)
+//2. Function is called, THIS keyword will be set this newly created object (function is called, this = {})
+//3. Newly created object is linked to a prototype ({ linked to prototype})
+//4. Object that created in the beggining is automatically returned from the constructor funtion (function automatically returns that epmty object from the beggining), at this point the object no longer needs to be empty
+
+object created from a class is called an instance
