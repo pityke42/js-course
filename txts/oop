@@ -8,10 +8,19 @@ prototypal inheritance the prototype contains methods that are accessavle to all
 objects delegate behaviour to the linked prototyp object
 methods are copied from the class to the objects
 
-constructor functions called with the NEW keyword:
+//CONSTRUCTOR functions called with the NEW keyword:
+NEVER CREATE A METHOD INSIDE OF A CONSTRUCTOR FUNCTION
 //1. New epmty object is created (new {} is created)
 //2. Function is called, THIS keyword will be set this newly created object (function is called, this = {})
 //3. Newly created object is linked to a prototype ({ linked to prototype})
 //4. Object that created in the beggining is automatically returned from the constructor funtion (function automatically returns that epmty object from the beggining), at this point the object no longer needs to be empty
+New operator contains step 3. wich links the new empty object to the prototype, create the __proto__ property
+It sets its value to the prototype property to the function that is being called
 
 object created from a class is called an instance
+
+//PROTOTYPES
+Each and every function in js automatically has a prperty called prototype that includes constructor functions
+
+Every object by created constructor function will get access to all the methods and properties that we define on the constructors prototype property
+//.prototypeOfLinkedObjects
