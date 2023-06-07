@@ -41,3 +41,4 @@ Person.prototype's prototype is Object.prototype
 __proto__: Person.prototype -> __proto__: Object.prototype -> __proto__: null that is the top of the prototype chain
 prototype chain is similar with scope chain but with prototypes
 if js cannot find a certain property or a method in the certain object it looks up into the next prototype in the prototype chain and tries to find 
+Objetc.prototype has the hasOwnProperty() and run it on the lower objects and the method has not been copied to the lower object simply inharited

@@ -44,10 +44,50 @@ console.log(Person.prototype.isPrototypeOf(Person));
 
 //set properties on prototype
 //not directly in the object
-//
 Person.prototype.species = 'Homo Sapiens';
 console.log(jonas, matilda);
 console.log(jonas.species, matilda.species);
 
-console.log(jonas.hasOwnProperty('firstName'))
+//species property is not really inside the jonas object, it has access to is because prototype property of Person object
+console.log(jonas.hasOwnProperty('firstName'));
+console.log(jonas.hasOwnProperty('species'));
 
+//Prototypal inheritance on bnuilt in objects
+console.log(jonas.__proto__);
+console.log(jonas.__proto__.__proto__);//->look up for Object.prototype
+console.log(jonas.__proto__.__proto__.__proto__);//->look up for null
+
+console.log(Person.prototype.constructor);//->points to the calcage function
+console.dir(Person.prototype.constructor);//inspect the function
+
+const arr = [3, 6, 4, 5, 6, 9, 3];//behind the scenes this is new Array constructor
+console.log(arr.__proto__);//access to all array methods 
+console.log(arr.__proto__ === Array.prototype);
+console.log(arr.__proto__.__proto__);
+
+ Array.prototype.unique = function(){
+    return [...new Set(this)];
+ };
+ console.log(arr.unique());
+
+ const h1 = document.querySelector('h1');
+ console.dir(x=>x+1);
+
+ //1. Coding challange
+
+ const Car = function(make, speed){
+    this.make = make;
+    this.speed = speed;
+ }
+ const bmw = new Car('Bmw', 120);
+ const mercedes = new Car('Mercedes', 95);
+ Car.prototype.accelerate = function(){
+    return `the ${this.make} accelerated speed is : ${this.speed + 10} km/h`;
+ };
+ Car.prototype.brake = function(){
+    return `the ${this.make} braked speed is ${this.speed - 5} km/h`;
+ };
+ console.log(bmw.accelerate());
+ console.log(bmw.brake());
+ console.log(mercedes.accelerate());
+ console.log(mercedes.brake());
