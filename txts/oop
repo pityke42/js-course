@@ -19,8 +19,25 @@ It sets its value to the prototype property to the function that is being called
 
 object created from a class is called an instance
 
-//PROTOTYPES
+//PROTOTYPES//Prototypal inheritance-delegation
 Each and every function in js automatically has a prperty called prototype that includes constructor functions
 
 Every object by created constructor function will get access to all the methods and properties that we define on the constructors prototype property
 //.prototypeOfLinkedObjects
+Own properties are only the ones that are declared directly on the object itself, not including the inharited properties
+__proto__ always points to an object prototype
+If a property or a method cannot be found in a certain object js will look  its prototype
+pl:
+const Person = function(firstName, birthYear){
+    //Instance Properies
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+};
+Person.prototype.calcAge = function(){
+    console.log(2037 - this.birthYear);
+};
+Jonas object and prototype basically form a prototype chain
+Person.prototype's prototype is Object.prototype
+__proto__: Person.prototype -> __proto__: Object.prototype -> __proto__: null that is the top of the prototype chain
+prototype chain is similar with scope chain but with prototypes
+if js cannot find a certain property or a method in the certain object it looks up into the next prototype in the prototype chain and tries to find 
