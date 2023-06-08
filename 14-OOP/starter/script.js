@@ -98,8 +98,8 @@ console.log(arr.__proto__.__proto__);
 
 //Class declaration
  class PersonCl {
-   constructor(firstName, birthYear){
-      this.firstName = firstName;
+   constructor(fullname, birthYear){
+      this.fullname = fullname;
       this.birthYear = birthYear;
 
    }
@@ -108,13 +108,28 @@ console.log(arr.__proto__.__proto__);
       console.log(2037 - this.birthYear);
    }
    greet(){
-      console.log(`hey ${this.firstName}`);
+      console.log(`hey ${this.fullname}`);
+   }
+   get age(){
+      return 2037 - this.birthYear;
+   }
+
+   //Set a property that already exist 
+   set fullname(name){
+      console.log(name);
+      if(name.includes(' ')) this._fullname = name;
+      else alert(`${name } is not a full name!`);
+   }
+   get fullname(){
+      return this._fullname;
    }
  }
 
- const jessica = new PersonCl('Jessica', 1996);
+ const jessica = new PersonCl('Jessica Davis', 1996);
  console.log(jessica);
  jessica.calcAge();
+ console.log(jessica.age);
+ jessica.fullname
  
  console.log(jessica.__proto__ === PersonCl.prototype);
 
@@ -123,5 +138,28 @@ console.log(arr.__proto__.__proto__);
 //  }
 jessica.greet();
 
+const walter = new PersonCl('walter white', 1965)
+
+
 //Accessor properties//Getter Setter
+const account = {
+    owner: 'jonas',
+    movements: [200, 530, 120, 300],
+
+   //Getter
+   get latest(){
+      return this.movements.slice(-1).pop();
+   },
+
+   //Setter
+   set latest(mov){
+      this.movements.push(mov);
+   },
+
+};
+//Calling GETTER
+console.log(account.latest);
+//Calling SETTER
+account.latest = 50;
+console.log(account.movements);
 
