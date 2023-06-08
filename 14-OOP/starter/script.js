@@ -189,3 +189,31 @@ Person.hey();
 // jonas.hey();
 
 PersonCl.hey();
+
+//Object.create
+const PersonProto = {
+   calcAge(){
+      console.log(2037 - this.birthYear);
+   },
+
+   //Looks similar as a constructor, but this has nothing to do with any constructor function, we are not using the NEW operator  to call this
+   init(firstName, birthYear){
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+   },
+};
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__);
+console.log(steven.__proto__ === PersonProto);
+console.log(steven.__proto__ === PersonProto.prototype);
+console.dir(steven.__proto__);
+
+const sarah = Object.create(PersonProto);
+sarah.init('sarah', 1979);
+sarah.calcAge();
+console.log(sarah)
