@@ -1,6 +1,6 @@
 'use strict';
 
-/*
+
 //Contructor function
 const Person = function(firstName, birthYear){
     //Instance Properies
@@ -14,7 +14,9 @@ const Person = function(firstName, birthYear){
     //     console.log(2037 - this.birthYear);
     // };
 };
+
 const jonas = new Person('Jonas', 1991); //instance from a person
+/*
 console.log(jonas);
 
 const matilda = new Person('Matilda', 2017);
@@ -92,10 +94,10 @@ console.log(arr.__proto__.__proto__);
  console.log(bmw.brake());
  console.log(mercedes.accelerate());
  console.log(mercedes.brake());
-*/
+
 //Class expression
 // const PersonCL = class {}
-
+*/
 //Class declaration
  class PersonCl {
    constructor(fullname, birthYear){
@@ -103,7 +105,9 @@ console.log(arr.__proto__.__proto__);
       this.birthYear = birthYear;
 
    }
-   //Methods wilol be added to the .prototype property
+   //Instance methods
+   //Methods will be added to the .prototype property
+   //All instances have access to them
    calcAge(){
       console.log(2037 - this.birthYear);
    }
@@ -117,13 +121,24 @@ console.log(arr.__proto__.__proto__);
    //Set a property that already exist 
    set fullname(name){
       console.log(name);
+
+      //Creating a new variable (_fullName)
       if(name.includes(' ')) this._fullname = name;
       else alert(`${name } is not a full name!`);
    }
+
+   //Creating a new getter to earn the same name caused declaration
    get fullname(){
       return this._fullname;
    }
+
+   //Static method
+   static hey(){
+      console.log(`hey there`);
+      console.log(this);
+   }
  }
+/*
 
  const jessica = new PersonCl('Jessica Davis', 1996);
  console.log(jessica);
@@ -162,4 +177,15 @@ console.log(account.latest);
 //Calling SETTER
 account.latest = 50;
 console.log(account.movements);
+*/
+//Static methods 
+//(this is not inherited)
+Person.hey = function(){
+   console.log(`hey there`);
+   console.log(this);
+}
+Person.hey();
+//(hey() function is not in the prototype of the jonas object)
+// jonas.hey();
 
+PersonCl.hey();
