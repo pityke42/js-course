@@ -1,6 +1,6 @@
 'use strict';
 
-
+/*
 //Contructor function
 const Person = function(firstName, birthYear){
     //Instance Properies
@@ -74,20 +74,54 @@ console.log(arr.__proto__.__proto__);
  console.dir(x=>x+1);
 
  //1. Coding challange
-
  const Car = function(make, speed){
     this.make = make;
     this.speed = speed;
- }
+ };
  const bmw = new Car('Bmw', 120);
  const mercedes = new Car('Mercedes', 95);
  Car.prototype.accelerate = function(){
+    //this.speed += 10;
     return `the ${this.make} accelerated speed is : ${this.speed + 10} km/h`;
  };
  Car.prototype.brake = function(){
+    //this.speed -= 5;
     return `the ${this.make} braked speed is ${this.speed - 5} km/h`;
  };
  console.log(bmw.accelerate());
  console.log(bmw.brake());
  console.log(mercedes.accelerate());
  console.log(mercedes.brake());
+*/
+//Class expression
+// const PersonCL = class {}
+
+//Class declaration
+ class PersonCl {
+   constructor(firstName, birthYear){
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+
+   }
+   //Methods wilol be added to the .prototype property
+   calcAge(){
+      console.log(2037 - this.birthYear);
+   }
+   greet(){
+      console.log(`hey ${this.firstName}`);
+   }
+ }
+
+ const jessica = new PersonCl('Jessica', 1996);
+ console.log(jessica);
+ jessica.calcAge();
+ 
+ console.log(jessica.__proto__ === PersonCl.prototype);
+
+//  PersonCl.prototype.greet = function(){
+//    console.log(`hey ${this.firstName}`);
+//  }
+jessica.greet();
+
+//Accessor properties//Getter Setter
+
