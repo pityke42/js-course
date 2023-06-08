@@ -177,7 +177,7 @@ console.log(account.latest);
 //Calling SETTER
 account.latest = 50;
 console.log(account.movements);
-*/
+
 //Static methods 
 //(this is not inherited)
 Person.hey = function(){
@@ -214,6 +214,38 @@ console.log(steven.__proto__ === PersonProto.prototype);
 console.dir(steven.__proto__);
 
 const sarah = Object.create(PersonProto);
-sarah.init('sarah', 1979);
+sarah.init('sarah', 1979);//explicitly called on sarah
 sarah.calcAge();
-console.log(sarah)
+console.log(sarah);
+*/
+//2.Coding challange
+class Car {
+   constructor(make, speed){
+      this.make = make;
+      this.speed = speed;
+   }
+   accelerate(){
+      this.speed += 10
+      return this.speed;
+   }
+   break(){
+      this.speed -= 5;
+      return this.speed;
+   }
+   get speedUS(){
+      return this.speed / 1.6;
+   }
+   set speedUS(speed){
+      this.speed = speed *  1.6;
+      
+   }
+
+}
+const ford = new Car('Ford', 120);
+console.log(ford);
+console.log(ford.accelerate());
+console.log(ford.accelerate());
+console.log(ford.break());
+console.log(ford.speedUS);
+ford.speedUS = 50;
+console.log(ford);
