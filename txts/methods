@@ -70,3 +70,6 @@ FETCH download than execute
 ///////////////////////////////////////////////////////////////
 DOM
 //For scrolling and revealing things on site --> IntersectionObserver() 189.
+
+function.call() method setting the THIS keyword to the parent method/class
+

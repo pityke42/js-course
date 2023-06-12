@@ -1,6 +1,6 @@
 'use strict';
 
-
+/*
 //Contructor function
 const Person = function(firstName, birthYear){
     //Instance Properies
@@ -16,7 +16,7 @@ const Person = function(firstName, birthYear){
 };
 
 const jonas = new Person('Jonas', 1991); //instance from a person
-/*
+
 console.log(jonas);
 
 const matilda = new Person('Matilda', 2017);
@@ -217,7 +217,7 @@ const sarah = Object.create(PersonProto);
 sarah.init('sarah', 1979);//explicitly called on sarah
 sarah.calcAge();
 console.log(sarah);
-*/
+
 //2.Coding challange
 class Car {
    constructor(make, speed){
@@ -236,7 +236,7 @@ class Car {
       return this.speed / 1.6;
    }
    set speedUS(speed){
-      this.speed = speed *  1.6;
+      this.speed = speed * 1.6;
       
    }
 
@@ -249,3 +249,42 @@ console.log(ford.break());
 console.log(ford.speedUS);
 ford.speedUS = 50;
 console.log(ford);
+*/
+
+//Inheritance between Classes and constructor functions
+const Person = function(firstName, birthYear){
+   this.firstName = firstName;
+   this.birthYear = birthYear;
+};
+Person.prototype.calcAge = function(){
+   console.log(2037 - this.birthYear);
+};
+
+const Student = function(firstName, birthYear, course){
+   Person.call(this, firstName, birthYear);
+
+   //DRY
+   // this.firstName = firstName;
+   // this.birthYear = birthYear;
+   this.course = course;
+};
+
+//Linking prototypes
+Student.prototype = Object.create(Person.prototype);//inhariting
+// Student.prototype = Person.prototype;//setting to the exact object WRONG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+console.log(Student.prototype)
+
+Student.prototype.introduce = function(){
+   console.log(`my name is ${this.firstName} and i study ${this.course}`)
+};
+const mike = new Student('mike', 2020, 'Computer Science');
+console.log(mike);
+mike.introduce();
+mike.calcAge();
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);

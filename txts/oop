@@ -42,3 +42,19 @@ __proto__: Person.prototype -> __proto__: Object.prototype -> __proto__: null th
 prototype chain is similar with scope chain but with prototypes
 if js cannot find a certain property or a method in the certain object it looks up into the next prototype in the prototype chain and tries to find 
 Objetc.prototype has the hasOwnProperty() and run it on the lower objects and the method has not been copied to the lower object simply inharited
+
+//1.Classes are NOT hoisted (function declarations are hoisted)
+//2.Classes are first-class citizes (Can pass them into functions and also return them from functions)
+//3.Body of a class always executed in strict mode
+
+//Setter
+Setter methods needs one parameter
+Call like a property
+//Getter
+Calling getters like proprties
+
+This keyword: whatever object is calling the method will be the this keyword inside of that function
+
+//Object.create
+There are no prototype properties involved, no constructor functions, no NEW operator
+Manually set a prototype of an object to any other objects
