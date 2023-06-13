@@ -322,6 +322,7 @@ console.log(tesla);
 tesla.chargeBattery(90);
 tesla.break();
 tesla.accelerate();
+
 console.dir(Student.prototype.constructor);
 
 class PersonCl {
@@ -383,7 +384,7 @@ class PersonCl {
  const martha = new StudentCl('martha jones', 2012, 'computer science');
  martha.introduce();
  martha.calcAge();
- */
+
  const PersonProto = {
    calcAge(){
       console.log(2037 - this.birthYear);
@@ -410,7 +411,139 @@ const jay = Object.create(StudentProto);
 jay.init('jay', 2010, 'computer science');
 jay.introduce();
 jay.calcAge();
-console.log(jay.__proto__);
-console.log(jay.__proto__.__proto__);
-console.log(jay.__proto__.__proto__.__proto__);
-console.log(jay.__proto__.__proto__.__proto__.__proto__);
+console.log(jay.__proto__);//StudentProto
+console.log(jay.__proto__.__proto__);//PersonProto
+console.log(jay.__proto__.__proto__.__proto__);//Object prototype
+console.log(jay.__proto__.__proto__.__proto__.__proto__);//null
+
+class Account {
+   //1.Public Fields (instances)
+   locale = navigator.language;
+   
+   //2.Private Fields (instances)
+   #movements = [];
+   #pin;
+
+
+   constructor( owner, currency, pin){
+      this.owner = owner; 
+      this.currency = currency;
+      //Protected property
+      this.#pin = pin;
+      // this._movements = [];
+      // this.locale = navigator.language;
+
+      console.log(`thanks for opening and account, ${owner}`);
+   };
+
+   //3.Public Methods
+
+   //Public interface
+   getMovements(){
+      return this.#movements;
+   };
+   deposit(value){
+      this.#movements.push(value);
+      return this;
+   };
+   withdraw(value){
+      this.deposit(-value);
+      return this;
+   };
+  
+   requestLoan(value){
+      if(this._approveLoan(value)){
+         this.deposit(value);
+         console.log(`loan approved`);
+         return this;
+      };
+   };
+
+   //Static
+   static helper(){
+      console.log('Helper')
+   };
+
+
+   //4.Private Methods
+   _approveLoan(value){
+      return true;
+   };
+};
+const acc1 = new Account('jonas', 'EUR', 1111, []);
+console.log(acc1);
+
+//intead of pushing from outside -->? declare the methods in the class (Public interface)
+// acc1.#movements.push(250);
+// acc1.#movements.push(-140);
+acc1.deposit(250);
+acc1.withdraw(140);
+console.log(acc1);
+console.log(acc1.pin);
+
+acc1.requestLoan(1000);
+console.log(acc1.getMovements());
+
+//Calling a private field
+// console.log(acc1.#movements);
+// console.log(acc1.#pin);
+// console.log(acc1.#approveLoan(1000));
+
+//Calling a STATIC method
+Account.helper();
+
+//Public Fields
+//Private Fields
+//Public Methods
+//Private Methods
+//Statics
+
+//Chaining methods
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1.getMovements());
+ */
+//Coding challange 4.
+class CarCl {
+   constructor(make, speed){
+      this.make = make;
+      this.speed = speed;
+   }
+   accelerate= function(){
+      this.speed += 10;
+      console.log(`${this.make} is going at ${this.speed} km/h`);
+   }
+   brake(speed){
+      this.speed -= 5;
+      console.log(`${this.make} is going at ${this.speed} km/h`)
+      return this;
+   }
+}
+class EVCL extends CarCl {
+   #charge;
+
+   constructor(make, speed, charge){
+      super(make, speed);
+      this.#charge = charge;
+   }
+   // charge(chargeTo){
+   //    this.charge = chargeTo;
+   //    return this;
+   // }
+   chargeBattery(chargeTo){
+      this.#charge = chargeTo;
+      return this;
+   }
+   accelerate(){
+      this.speed += 20;
+      this.#charge--;
+      console.log(`${this.make} is going at ${this.speed} km/h, with charge of ${this.#charge}`);
+      return this;
+   }
+
+}
+
+
+
+const rivian = new EVCL('rivian', 120, 23);
+console.log(rivian);
+rivian.brake().accelerate()
