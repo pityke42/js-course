@@ -323,7 +323,7 @@ tesla.chargeBattery(90);
 tesla.break();
 tesla.accelerate();
 console.dir(Student.prototype.constructor);
-*/
+
 class PersonCl {
    constructor(fullname, birthYear){
       this.fullname = fullname;
@@ -382,4 +382,35 @@ class PersonCl {
 
  const martha = new StudentCl('martha jones', 2012, 'computer science');
  martha.introduce();
- martha.calcAge()
+ martha.calcAge();
+ */
+ const PersonProto = {
+   calcAge(){
+      console.log(2037 - this.birthYear);
+   },
+
+   init(firstName, birthYear){
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+   },
+};
+const steven = Object.create(PersonProto);
+
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function(firstName, birthYear, course){
+   PersonProto.init.call(this, firstName, birthYear);
+   this.course = course;
+
+}
+StudentProto.introduce = function(){
+   console.log(`my named is ${this.firstName} and i study ${this.course}`)
+}
+const jay = Object.create(StudentProto);
+jay.init('jay', 2010, 'computer science');
+jay.introduce();
+jay.calcAge();
+console.log(jay.__proto__);
+console.log(jay.__proto__.__proto__);
+console.log(jay.__proto__.__proto__.__proto__);
+console.log(jay.__proto__.__proto__.__proto__.__proto__);
