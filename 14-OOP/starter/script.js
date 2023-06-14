@@ -508,11 +508,11 @@ class CarCl {
       this.make = make;
       this.speed = speed;
    }
-   accelerate= function(){
+   accelerate(){
       this.speed += 10;
       console.log(`${this.make} is going at ${this.speed} km/h`);
    }
-   brake(speed){
+   brake(){
       this.speed -= 5;
       console.log(`${this.make} is going at ${this.speed} km/h`)
       return this;
@@ -525,10 +525,6 @@ class EVCL extends CarCl {
       super(make, speed);
       this.#charge = charge;
    }
-   // charge(chargeTo){
-   //    this.charge = chargeTo;
-   //    return this;
-   // }
    chargeBattery(chargeTo){
       this.#charge = chargeTo;
       return this;
@@ -539,11 +535,10 @@ class EVCL extends CarCl {
       console.log(`${this.make} is going at ${this.speed} km/h, with charge of ${this.#charge}`);
       return this;
    }
-
 }
 
 
 
 const rivian = new EVCL('rivian', 120, 23);
 console.log(rivian);
-rivian.brake().accelerate()
+rivian.accelerate().chargeBattery(50).accelerate().brake()
