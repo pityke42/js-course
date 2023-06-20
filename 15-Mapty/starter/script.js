@@ -3,6 +3,64 @@
 // prettier-ignore
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+
+
+
+
+class Workout {
+  //Fields
+    date = new Date();
+    id = (Date.now() + '').slice(-10);
+
+    constructor(coords, distance, duration){
+        this.coords = coords; //[LATITUDE, LONGITUDE]
+        this.distance = distance; //IN KM
+        this.duration = duration; //IN MIN
+    }
+}
+
+class Running extends Workout{
+  //Fields
+  type = 'running';
+
+    constructor(coords, distance, duration, candence){
+        super(coords,distance, duration);
+        this.candence = candence;
+        // this.type = 'running';
+
+        this.calcPace();
+        
+    }
+
+    calcPace(){
+        //minutes/km
+        this.pace = this.duration / this.distance;
+        return this.pace;
+    }
+}
+
+class Cycling extends Workout{
+  //Fields
+  type = 'cycling';
+
+    constructor(coords, distance, duration, elevationGain){
+        super(coords,distance, duration);
+        this.elevationGain = elevationGain;
+        // this.type = 'cycling';
+
+        this.calcSpeed();
+    }
+
+    calcSpeed(){
+        //km/h
+        this.speed = this.distance / this.duration / 60;
+        return this.speed;
+    }
+
+}
+
+
+//////////////////////APPLICATION ARCHITECTURE///////////////////////////////////////////////////////////////////////////////////
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
 const inputType = document.querySelector('.form__input--type');
@@ -11,59 +69,141 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-let map; 
-let mapEvent;
+class App {
+  //Private instance properties
+  #map;
+  #mapEvent;
+  #workouts = [];
+
+  constructor(){
+      this._getPosition();
+
+      form.addEventListener('submit', this._newWorkout.bind(this));
+
+      inputType.addEventListener('change', this._toggleElevationField);
+    }
+
+  _getPosition(){
+      if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(this._loadMap.bind(this),
+          function(){
+                alert('Could not get your position!');
+            });
+            };
+    }
+
+  _loadMap(position){
+      const {latitude} = position.coords;
+      const {longitude} = position.coords;
+      // console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+        
+        const coords = [latitude, longitude];
+
+      this.#map = L.map('map').setView(coords, 13);
+        
+  L.tileLayer('https://{s}.tile.openstreetmap.fr//hot/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(this.#map);
+
+      //Handling clicks on map
+      //on() function is a leeflet libary function/ taking place insted of the addEventListener()
+      this.#map.on('click', this._showForm.bind(this));
+  }
+
+    _showForm(mapE){
+        this.#mapEvent = mapE;
+        form.classList.remove('hidden');
+        inputDistance.focus();
+    }
+
+    _toggleElevationField(){
+        inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+        inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+    }
+
+    _newWorkout(event){
+
+      //Helper functions for validity ceheck
+      const validInputs = (...inputs) => inputs.every(input => Number.isFinite(input));
+      const allPositive = (...inputs) => inputs.every(input => input > 0);
+        event.preventDefault();
+
+        //Get data from the form
+        const type = inputType.value;
+        const distance = +inputDistance.value; //converting to a number
+        const duration = +inputDuration.value;
+        const {lat, lng} = this.#mapEvent.latlng;
+        let workout;
+
+      //If activity is running, create running object
+        if(type === 'running'){
+          const candence = +inputCadence.value;
+
+          //Check is data is valid
+          if(
+          //   !Number.isFinite(distance) || 
+          // !Number.isFinite(duration) || 
+          // !Number.isFinite(candence)
+          !validInputs(distance, duration, candence) || 
+          !allPositive(distance, duration, candence)
+          )
+          return alert('Inputs have to be positive numbers!');
+
+          workout = new Running([lat, lng], distance, duration, candence);
+          
+        }
+
+      //If activity is cycling, create cycling object
+        if(type === 'cycling'){
+          const elevation = +inputElevation.value;
+
+          //Check is data is valid
+          if(
+            //   !Number.isFinite(distance) || 
+            // !Number.isFinite(duration) || 
+            // !Number.isFinite(candence)
+            !validInputs(distance, duration, elevation) || 
+            !allPositive(distance, duration)
+            )
+            return alert('Inputs have to be positive numbers!');
+
+            workout = new Cycling([lat, lng], distance, duration, elevation);
+        }
+
+        //Add the new object to the workout array
+        this.#workouts.push(workout);
+        console.log(workout)
+
+        //Render workout on map as a marker
+        this.renderWorkoutMarker(workout);
+
+        //Render workout on list 
+
+        //Hide form + clear input fields
+        inputDistance.value = inputDuration.value = inputElevation.value = '';
 
 
-if(navigator.geolocation){
-navigator.geolocation.getCurrentPosition(function(position){
-    const {latitude} = position.coords;
-    const {longitude} = position.coords;
-    console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+    }
+    renderWorkoutMarker(workout){
 
-    const coords = [latitude, longitude];
-    map = L.map('map').setView(coords, 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.fr//hot/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-
-//Handling clicks on map
-//on() function is a leeflet libary function/ taking place insted of the addEventListener()
-map.on('click', function(mapE){
-    mapEvent = mapE;
-    form.classList.remove('hidden');
-    inputDistance.focus();
-});
-}, 
-function(){
-    alert('Could not get your position!');
-});
-};
-
-
-form.addEventListener('submit', function(event){
-    event.preventDefault();
-
-    //Clear input fields
-    inputDistance.value = inputDuration.value = inputElevation.value = '';
-    //Display marker
-    const {lat, lng} = mapEvent.latlng;
-    
-    L.marker([lat, lng]).addTo(map)
-    .bindPopup(L.popup({
+      L.marker(workout.coords).addTo(this.#map)
+      .bindPopup(L.popup({
         maxWidth: 250,
         minWidth: 100,
         autoClose: false,
         closeOnClick: false,
-        className: 'running-popup',
-    }))
-    .setPopupContent('Workout')
-    .openPopup();
-});
+        className: `${workout.type}-popup`,
+          }))
+        .setPopupContent(this.type)
+        .openPopup();
+    }
+}
 
-inputType.addEventListener('change', function(){
-    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
-    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
-})
+
+const app = new App();
+app._getPosition();
+
+
+
+
+
