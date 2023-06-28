@@ -504,40 +504,42 @@ console.log(acc1.getMovements());
  */
 //Coding challange 4.
 class CarCl {
-   constructor(make, speed){
-      this.make = make;
-      this.speed = speed;
-   }
-   accelerate(){
-      this.speed += 10;
-      console.log(`${this.make} is going at ${this.speed} km/h`);
-   }
-   brake(){
-      this.speed -= 5;
-      console.log(`${this.make} is going at ${this.speed} km/h`)
-      return this;
-   }
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+    return this;
+  }
 }
 class EVCL extends CarCl {
-   #charge;
+  #charge;
 
-   constructor(make, speed, charge){
-      super(make, speed);
-      this.#charge = charge;
-   }
-   chargeBattery(chargeTo){
-      this.#charge = chargeTo;
-      return this;
-   }
-   accelerate(){
-      this.speed += 20;
-      this.#charge--;
-      console.log(`${this.make} is going at ${this.speed} km/h, with charge of ${this.#charge}`);
-      return this;
-   }
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h, with charge of ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
 }
-
-
 
 const rivian = new EVCL('rivian', 120, 23);
 console.log(rivian);
