@@ -76,4 +76,15 @@ setTimeout(() => {
 */
 //Fetcing 
 const request = fetch('https://restcountries.com/v2/name/hungary');
-console.log(request)
+console.log(request);
+
+const getCountryData = function(country){
+  fetch(`https://restcountries.com/v2/name/${country}`).then(function(response){
+    console.log(response);
+    return response.json(); //json() function returning another PROMISE
+  }).then(function(data){
+    console.log(data)
+  });
+
+}
+getCountryData('hungary')
