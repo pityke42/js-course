@@ -175,3 +175,30 @@ btn.addEventListener('click', function () {
 
 getCountryData('asutralia');
 */
+//Coding challange 1.
+const whereAmI = function(lat, lon){
+  fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=a7b8065d7aa6413084aeb0b29122d5d1`)
+  .then(res => {
+    console.log(res)
+    // if(!res.ok) throw new Error(`location error ${res.status}`);
+    return res.json();
+  })
+  .then(data => {
+    console.log(data)
+    console.log(`You are in ${data.name}, ${data.country}`)
+
+    return fetch(`https://restcountries.com/v2/name/${data.country}`);
+  })
+  .then(res => {
+    if(!res.ok) throw new Error(`location error ${res.status}`);
+    return res.json();
+  })
+  .then(data => renderCountry(data[0]))
+  .catch(err => console.error(`${err.message} error`))
+   
+}
+
+whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+// whereAmI(-33.933, 18.474);
+// whereAmI(47.23490, 19.61270);
