@@ -17,4 +17,5 @@ Promise states:
         Fullfilled: successful value, usable data
         Rejected: error durring async task, cannot connect to epi server
     We are able to handle these different states in code.
-            
+
+then() function returns another promise

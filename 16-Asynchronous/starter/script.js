@@ -2,7 +2,7 @@
 
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
-/*
+
 ///////////////////////////////////////
 
 const renderCountry = function (data, className = '') {
@@ -23,6 +23,7 @@ const renderCountry = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
   countriesContainer.style.opacity = 1;
 };
+/*
 const getCountryAndNeighbour = function (country) {
   //(AJAX CALL 1)
   //Oldest way AJAX call
@@ -78,13 +79,30 @@ setTimeout(() => {
 const request = fetch('https://restcountries.com/v2/name/hungary');
 console.log(request);
 
-const getCountryData = function(country){
-  fetch(`https://restcountries.com/v2/name/${country}`).then(function(response){
-    console.log(response);
-    return response.json(); //json() function returning another PROMISE
-  }).then(function(data){
-    console.log(data)
-  });
+// const getCountryData = function(country){
+//   fetch(`https://restcountries.com/v2/name/${country}`).then(function(response){
+//     console.log(response);
+//     return response.json(); //json() function returning another PROMISE
+//   }).then(function(data){
+//     console.log(data)
+//     renderCountry(data[0])
+//   });
+// }
 
+const getCountryData = function(country){
+  //Country 1
+  fetch(`https://restcountries.com/v2/name/${country}`)
+  .then((response) => response.json()) //json() function returning another PROMISE
+  .then((data) => {
+    renderCountry(data[0]);
+    const neighbour = data[0].borders?.[0];
+    if(!neighbour) return;
+
+    //Country 2 (neighbour)
+    return fetch(`https://restcountries.com/v2/alpha/${neighbour}`);
+  })
+  .then(response => response.json())
+  .then(data => renderCountry(data, 'neighbour'));
 }
-getCountryData('hungary')
+getCountryData('hungary');
+getCountryData('canada');
