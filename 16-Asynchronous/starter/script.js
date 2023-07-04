@@ -176,29 +176,46 @@ btn.addEventListener('click', function () {
 getCountryData('asutralia');
 */
 //Coding challange 1.
+const renderCountry2 = function (data, className = '') {
+  const html = `
+  <article class="country ${className}">
+        <img class="country__img" src=" ${data.flag}" />
+        <div class="country__data">
+          <h3 class="country__name">${data.name}</h3>
+          <h4 class="country__region">${data.region}</h4>
+          <p class="country__row"><span>👫</span>${(
+            +data.population / 1000000
+          ).toFixed(1)}</p>
+          <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+          <p class="country__row"><span>💰</span>${data.currencies[0].code}</p>
+        </div>
+      </article>`;
+
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  // countriesContainer.style.opacity = 1;
+};
+
 const whereAmI = function(lat, lon){
   fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=a7b8065d7aa6413084aeb0b29122d5d1`)
   .then(res => {
-    console.log(res)
-    // if(!res.ok) throw new Error(`location error ${res.status}`);
+    if(!res.ok) throw new Error(`location error ${res.status}`);
     return res.json();
   })
   .then(data => {
-    console.log(data)
-    console.log(`You are in ${data.name}, ${data.country}`)
-
-    return fetch(`https://restcountries.com/v2/name/${data.country}`);
+    console.log(`You are in ${data.results[0].city}, ${data.results[0].country}`);
+    return fetch(`https://restcountries.com/v2/name/${data.results[0].country}`);
   })
   .then(res => {
     if(!res.ok) throw new Error(`location error ${res.status}`);
     return res.json();
   })
-  .then(data => renderCountry(data[0]))
-  .catch(err => console.error(`${err.message} error`))
-   
+  .then(data => { renderCountry2(data[0])})
+  .catch(err => console.error(err.message))
+  .finally(() => countriesContainer.style.opacity = 1);
 }
-
 whereAmI(52.508, 13.381);
-// whereAmI(19.037, 72.873);
-// whereAmI(-33.933, 18.474);
-// whereAmI(47.23490, 19.61270);
+whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
+whereAmI(47.23490, 19.61270);
+
+
